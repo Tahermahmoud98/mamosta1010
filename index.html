@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.5.0/lz-string.min.js"></script>
     
     <style>
         :root {
@@ -62,79 +63,7 @@
         [data-bs-theme="dark"] .stat-card { background-color: rgba(255, 255, 255, 0.05); }
         .nisab-table input { max-width: 80px; text-align: center; }
 
-        /* --- Welcome Screen V3 (Premium Design) --- */
-        @keyframes gradientAnimation {
-            0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; }
-        }
-        @keyframes fadeInSlideUp {
-            from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); }
-        }
-        @media (prefers-reduced-motion: reduce) {
-          *, ::before, ::after {
-            animation-delay: -1ms !important;
-            animation-duration: 1ms !important;
-            animation-iteration-count: 1 !important;
-            background-attachment: initial !important;
-            scroll-behavior: auto !important;
-            transition-duration: 0s !important;
-            transition-delay: 0s !important;
-          }
-        }
-
-        #welcome-screen {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            z-index: 9999; display: flex; justify-content: center; align-items: center;
-            padding: 20px; transition: opacity 0.6s ease-out, visibility 0.6s;
-            background: linear-gradient(-45deg, #0b2241, #1e4273, #23a6d5, #23d5ab);
-            background-size: 400% 400%; animation: gradientAnimation 18s ease infinite;
-            color: #fff; perspective: 1000px; /* For 3D tilt effect */
-        }
-        .welcome-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 1.5rem; padding: 2.5rem 3rem; max-width: 750px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-            text-align: center;
-            transform-style: preserve-3d; /* For 3D tilt effect */
-            transition: transform 0.1s ease-out; /* Smooth tilt transition */
-        }
-        .welcome-card > * { animation: fadeInSlideUp 0.9s cubic-bezier(0.25, 1, 0.5, 1) backwards; }
-        .welcome-card h1 { animation-delay: 0.1s; }
-        .welcome-card p.lead { animation-delay: 0.2s; opacity: 0.9; }
-        .welcome-card #startButton { animation-delay: 0.3s; }
-        .welcome-card .creator-info { animation-delay: 0.4s; }
-
-        .welcome-title { font-weight: 800; text-shadow: 2px 2px 5px rgba(0,0,0,0.25); }
-        #startButton {
-            font-weight: 600; border-radius: 50px;
-            transition: all 0.3s ease; box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-            border: none; background: #fff; color: #1e4273;
-            padding: 1rem 2.5rem;
-        }
-        #startButton:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-        .creator-info { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.2); font-size: 0.95rem; }
-        .creator-info p { margin-bottom: 1rem; opacity: 0.8; }
-        .social-icons { margin: 1.5rem 0 1rem; }
-        .social-icons a {
-            color: #fff; font-size: 1.6rem; margin: 0 10px; text-decoration: none;
-            transition: all 0.3s ease; display: inline-block; animation: fadeInSlideUp 0.9s backwards;
-        }
-        /* Staggered animation for social icons */
-        .social-icons a:nth-child(1) { animation-delay: 0.5s; }
-        .social-icons a:nth-child(2) { animation-delay: 0.6s; }
-        .social-icons a:nth-child(3) { animation-delay: 0.7s; }
-        .social-icons a:nth-child(4) { animation-delay: 0.8s; }
-        .social-icons a:nth-child(5) { animation-delay: 0.9s; }
-        .social-icons a:nth-child(6) { animation-delay: 1.0s; }
-        .social-icons a:nth-child(7) { animation-delay: 1.1s; }
-
-        .social-icons a:hover { transform: scale(1.25) rotate(5deg); color: #cdeeff; }
-        .copyright { font-size: 0.8rem; margin-top: 1.5rem; opacity: 0.6; }
-        #welcome-screen.hidden { opacity: 0; pointer-events: none; visibility: hidden; }
+        /* Welcome screen styles removed (app opens directly) */
 
         /* Print Styles */
         @media print {
@@ -158,28 +87,7 @@
 </head>
 <body data-bs-theme="light">
 
-    <!-- Welcome Screen V3 -->
-    <div id="welcome-screen">
-        <div class="welcome-card">
-            <i class="fas fa-table fa-4x mb-4"></i>
-            <h1 class="display-4 welcome-title">سیسته‌مێ پێشکەفتی یێ خشتێ قوتابخانێ</h1>
-            <p class="lead">خشتێ وانه‌كان ب شێوازه‌كێ هونه‌ری و ئاسان دروست بكه‌</p>
-            <button id="startButton" class="btn btn-light btn-lg shadow-lg mt-4">ده‌سپێكه‌</button>
-            <div class="creator-info">
-                <p>دروستكرن ژلایێ ماموستا: <strong>طاهر محمود محمد</strong> (قوتابخانا جودی یا بنه‌ره‌ت)</p>
-                <div class="social-icons">
-                    <a href="https://www.facebook.com/share/16KUSHtffJ/" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
-                    <a href="https://www.instagram.com/taher_mahmoud98?igsh=dm5jN3ZtMmttcDg5" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="https://wa.me/+9647503727069" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                    <a href="https://www.snapchat.com/add/tahermahmoud98?share_id=Npt2HjbFTP0&locale=ar-EG" target="_blank" title="Snapchat"><i class="fab fa-snapchat"></i></a>
-                    <a href="https://t.me/+9647503727069" target="_blank" title="Telegram"><i class="fab fa-telegram-plane"></i></a>
-                    <a href="viber://chat?number=%2B9647503727069" target="_blank" title="Viber"><i class="fab fa-viber"></i></a>
-                    <a href="https://www.threads.com/@taher_mahmoud98" target="_blank" title="Threads"><i class="fab fa-threads"></i></a>
-                </div>
-                <p class="copyright">&copy; هه‌می ماف پاراستینه‌</p>
-            </div>
-        </div>
-    </div>
+    <!-- Welcome screen removed: app opens directly -->
 
     <div class="container-fluid main-container">
         <!-- The rest of your application code is here, unchanged -->
@@ -198,10 +106,19 @@
                     </div>
                 </div>
                 <hr>
-                <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
-                    <li class="nav-item" role="presentation"><button class="nav-link active" id="distribution-tab" data-bs-toggle="tab" data-bs-target="#distribution-tab-pane" type="button"><i class="fas fa-users-cog me-2"></i>دابەشکرنا وانان</button></li>
-                    <li class="nav-item" role="presentation"><button class="nav-link" id="nisab-tab" data-bs-toggle="tab" data-bs-target="#nisab-tab-pane" type="button"><i class="fas fa-tasks me-2"></i>نصاب وانان</button></li>
-                    <li class="nav-item" role="presentation"><button class="nav-link" id="statistics-tab" data-bs-toggle="tab" data-bs-target="#statistics-tab-pane" type="button"><i class="fas fa-chart-pie me-2"></i>ئامار</button></li>
+                <ul class="nav nav-tabs mb-4" id="mainTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="distribution-tab" data-bs-toggle="tab" data-bs-target="#distribution-tab-pane" type="button" role="tab"><i class="fas fa-chalkboard-teacher me-2"></i>دابەشکرنا وانان</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link text-primary fw-bold" id="timetable-tab" data-bs-toggle="tab" data-bs-target="#timetable-tab-pane" type="button" role="tab" onclick="initTimetableTab()"><i class="fas fa-calendar-alt me-2"></i>خشتێ حەفتیانە</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="nisab-tab" data-bs-toggle="tab" data-bs-target="#nisab-tab-pane" type="button" role="tab"><i class="fas fa-user-clock me-2"></i>نصاب وانان</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="statistics-tab" data-bs-toggle="tab" data-bs-target="#statistics-tab-pane" type="button" role="tab"><i class="fas fa-chart-bar me-2"></i>ئامار و داتا</button>
+                    </li>
                 </ul>
             </div>
             <div class="card-body">
@@ -222,12 +139,27 @@
                                 <button class="btn btn-success btn-sm" onclick="createSchedule()"><i class="fas fa-table me-1"></i>خشتێ نوی</button>
                                 <button class="btn btn-info btn-sm" onclick="openSettingsModal()"><i class="fas fa-cog me-1"></i>رێكخستن</button>
                                 <div class="btn-group btn-group-sm">
-                                    <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown"><i class="fas fa-save me-1"></i>هیلان و ڤه‌گه‌راندن</button>
+                                    <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown"><i class="fas fa-cloud me-1"></i>هیلان و هەور</button>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#" onclick="handleSaveLoad('save')"><i class="fas fa-file-download fa-fw me-2"></i>هیلان وه‌ك JSON</a></li>
-                                        <li><a class="dropdown-item" href="#" onclick="handleSaveLoad('load')"><i class="fas fa-file-upload fa-fw me-2"></i>ڤه‌گه‌راندن ژ JSON</a></li>
+                                        <li><h6 class="dropdown-header">ل سەر كومپیوتەری</h6></li>
+                                        <li><a class="dropdown-item" href="#" onclick="handleSaveLoad('save')"><i class="fas fa-file-download fa-fw me-2 text-success"></i>هیلان وه‌ك JSON</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="handleSaveLoad('load')"><i class="fas fa-file-upload fa-fw me-2 text-warning"></i>ڤه‌گه‌راندن ژ JSON</a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><h6 class="dropdown-header">ل سەر هەورێ (Cloud)</h6></li>
+                                        <li><a class="dropdown-item" href="#" onclick="saveToCloud()"><i class="fas fa-cloud-upload-alt fa-fw me-2 text-primary"></i>هەڵگرتن لە هەور (Cloud Save)</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="loadFromCloud()"><i class="fas fa-cloud-download-alt fa-fw me-2 text-info"></i>ڤەگەڕاندن ژ هەور (Cloud Load)</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="resetCloudSync()"><i class="fas fa-unlink fa-fw me-2 text-danger"></i>ده‌ستپێكرنا كۆدەکێ نوی يێ هەورێ</a></li>
                                     </ul>
                                 </div>
+                                 <button class="btn btn-success btn-sm" onclick="exportToExcel()" title="هنارتن بۆ ئەکسێل"><i class="fas fa-file-excel me-1"></i>ئەکسێل</button>
+                                 <div class="btn-group btn-group-sm">
+                                    <button type="button" class="btn btn-outline-success dropdown-toggle" data-bs-toggle="dropdown"><i class="fas fa-file-code me-1"></i>HTML</button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#" onclick="downloadCurrentDistributionHTML()"><i class="fas fa-table fa-fw me-2 text-primary"></i>خشتێ دابەشکرنێ</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="downloadComprehensiveDistributionHTML()"><i class="fas fa-user-friends fa-fw me-2 text-success"></i>راپۆرتا ماموستایان</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="downloadSimpleDistributionHTML()"><i class="fas fa-th-list fa-fw me-2 text-secondary"></i>دابەشکرنا سادە</a></li>
+                                    </ul>
+                                 </div>
                                  <div class="btn-group btn-group-sm">
                                     <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"><i class="fas fa-print me-1"></i>چاپكرن</button>
                                     <ul class="dropdown-menu">
@@ -262,13 +194,77 @@
                     <div class="tab-pane fade" id="statistics-tab-pane" role="tabpanel">
                         <!-- Statistics content will be rendered here by JS -->
                     </div>
+                    <!-- Timetable Tab -->
+                    <div class="tab-pane fade" id="timetable-tab-pane" role="tabpanel">
+                        <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <input type="radio" class="btn-check" name="ttViewMode" id="btnViewClass" value="class" checked onchange="changeTimetableView()">
+                                    <label class="btn btn-outline-primary fw-bold" for="btnViewClass" title="خشتێ پولا"><i class="fas fa-chalkboard"></i></label>
+
+                                    <input type="radio" class="btn-check" name="ttViewMode" id="btnViewTeacher" value="teacher" onchange="changeTimetableView()">
+                                    <label class="btn btn-outline-primary fw-bold" for="btnViewTeacher" title="خشتێ ماموستا"><i class="fas fa-user-tie"></i></label>
+
+                                    <input type="radio" class="btn-check" name="ttViewMode" id="btnViewMaster" value="master" onchange="changeTimetableView()">
+                                    <label class="btn btn-outline-primary fw-bold" for="btnViewMaster" title="ماستر پولان"><i class="fas fa-border-all"></i></label>
+                                    
+                                    <input type="radio" class="btn-check" name="ttViewMode" id="btnViewMasterTeacher" value="master_teacher" onchange="changeTimetableView()">
+                                    <label class="btn btn-outline-primary fw-bold" for="btnViewMasterTeacher" title="ماستر ماموستایان"><i class="fas fa-users"></i></label>
+                                </div>
+                                <select id="timetableClassSelect" class="form-select form-select-sm" style="min-width: 100px; font-weight: bold;" onchange="renderTimetableGrid()"></select>
+                                <select id="timetableTeacherSelect" class="form-select form-select-sm d-none" style="min-width: 120px; font-weight: bold;" onchange="renderTimetableGrid()"></select>
+                            </div>
+                            <div class="d-flex gap-1 flex-wrap">
+                                <button id="btnAutoDistribute" class="btn btn-warning btn-sm fw-bold" onclick="autoDistributeTimetable()"><i class="fas fa-magic me-1"></i>ئۆتۆماتیکی</button>
+                                <button id="btnClearTimetable" class="btn btn-outline-danger btn-sm" onclick="clearClassTimetable()"><i class="fas fa-trash-alt me-1"></i>ڤالا بكه</button>
+                                <div class="btn-group btn-group-sm">
+                                    <button type="button" class="btn btn-outline-success dropdown-toggle" data-bs-toggle="dropdown"><i class="fas fa-file-code me-1"></i>HTML</button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#" onclick="downloadCurrentTimetableHTML()"><i class="fas fa-eye fa-fw me-2 text-primary"></i>دیمەنێ نها</a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item" href="#" onclick="promptMasterHtmlDownload('class')"><i class="fas fa-border-all fa-fw me-2 text-danger"></i>خشتێ گشتی پولان</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="promptMasterHtmlDownload('teacher')"><i class="fas fa-users fa-fw me-2 text-warning"></i>خشتێ گشتی ماموستایان</a></li>
+                                    </ul>
+                                </div>
+                                <div class="btn-group btn-group-sm">
+                                    <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown"><i class="fas fa-print me-1"></i>چاپکرن</button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#" onclick="printCurrentTimetableView()"><i class="fas fa-eye fa-fw me-2"></i>چاپکرنا دیمەنێ نها (الحالي)</a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item" href="#" onclick="promptPrintOptions('class')"><i class="fas fa-layer-group fa-fw me-2 text-success"></i>هەمی خشتەیێن پولان (للصفوف)</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="promptPrintOptions('teacher')"><i class="fas fa-user-tie fa-fw me-2 text-primary"></i>هەمی خشتەیێن ماموستایان (فرداً فرداً)</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="promptMasterPrintOptions('teacher')"><i class="fas fa-users fa-fw me-2 text-warning"></i>خشتێ گشتی ماموستایان (أفقي/عامودي)</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="promptMasterPrintOptions('class')"><i class="fas fa-border-all fa-fw me-2 text-danger"></i>خشتێ گشتی پولان (أفقي/عامودي)</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-9" id="gridCol">
+                                <div class="table-responsive" style="min-height: 450px;" id="timetableGridContainer">
+                                    <!-- Grid generated by JS -->
+                                </div>
+                            </div>
+                            <div class="col-md-3" id="unassignedCol">
+                                <div class="card shadow-sm h-100 border-warning">
+                                    <div class="card-header bg-warning text-dark fw-bold text-center">
+                                        <i class="fas fa-boxes me-2"></i>وانەیێن بێ جهـ
+                                        <div class="small fw-normal mt-1">(راكێشە بۆ دناڤ خشتەی دا)</div>
+                                    </div>
+                                    <div class="card-body bg-light sortable-list" id="unassignedSubjectsList" style="min-height: 400px; max-height: 600px; overflow-y: auto;">
+                                        <!-- Draggable subjects generated by JS -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Teacher Modal -->
-    <div class="modal fade" id="teacherModal" tabindex="-1"><div class="modal-dialog modal-xl"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="teacherModalTitle"></h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><form id="teacherForm"><input type="hidden" id="teacherId"><div class="row"><div class="col-lg-4 border-end"><h6 class="fw-bold">زانیاریێن ماموستای</h6>
+    <div class="modal fade" id="teacherModal" tabindex="-1"><div class="modal-dialog modal-xl modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="teacherModalTitle"></h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><form id="teacherForm"><input type="hidden" id="teacherId"><div class="row"><div class="col-lg-4 border-end"><h6 class="fw-bold">زانیاریێن ماموستای</h6>
         <div class="mb-3"><label class="form-label">ناڤێ ماموستای</label><input type="text" class="form-control" id="teacherName" required></div>
         <div class="mb-3"><label class="form-label">بروانامه</label>
             <select id="teacherCertificateSelect" class="form-select" onchange="this.value==='یێن دی' ? this.nextElementSibling.style.display='block' : this.nextElementSibling.style.display='none'">
@@ -288,12 +284,29 @@
             </select>
             <input type="text" class="form-control mt-2" id="teacherSpecializationOther" style="display: none;" placeholder="بسپوریا دی بنڤیسە">
         </div>
-        <hr><h6 class="fw-bold">لیستا بابه‌تان</h6><div id="subjectsContainer"></div><button type="button" class="btn btn-outline-success btn-sm mt-2" id="addSubjectBtn"><i class="fas fa-plus me-1"></i> زیادکرنا بابه‌ت</button></div><div class="col-lg-8">
-            <div class="d-flex justify-content-between align-items-center">
-                <p class="fw-bold mb-2">دابه‌شکرنا لسه‌ر پولان:</p>
-                <button type="button" class="btn btn-outline-secondary btn-sm mb-2" onclick="toggleModalLayout()" title="گوهورینا دیمه‌نێ دابه‌شکرنێ"><i class="fas fa-retweet me-1"></i>گوهورین</button>
+        <hr><h6 class="fw-bold">لیستا بابه‌تان</h6><div id="subjectsContainer"></div><button type="button" class="btn btn-outline-success btn-sm mt-2" id="addSubjectBtn"><i class="fas fa-plus me-1"></i> زیادکرنا بابه‌ت</button>
+        </div><div class="col-lg-8">
+            <ul class="nav nav-tabs mb-3" id="teacherModalTabs" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button class="nav-link active fw-bold" id="classes-tab" data-bs-toggle="tab" data-bs-target="#classes-tab-pane" type="button" role="tab"><i class="fas fa-chalkboard-teacher me-1"></i> دابه‌شکرنا لسه‌ر پولان</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link fw-bold text-danger" id="availability-tab" data-bs-toggle="tab" data-bs-target="#availability-tab-pane" type="button" role="tab"><i class="fas fa-calendar-times me-1"></i> قەدەغەکرنا وانان (حظر الحصص)</button>
+              </li>
+            </ul>
+            <div class="tab-content" id="teacherModalTabContent">
+              <div class="tab-pane fade show active" id="classes-tab-pane" role="tabpanel" tabindex="0">
+                  <div class="d-flex justify-content-between align-items-center">
+                      <p class="fw-bold mb-2">دابه‌شکرنا لسه‌ر پولان:</p>
+                      <button type="button" class="btn btn-outline-secondary btn-sm mb-2" onclick="toggleModalLayout()" title="گوهورینا دیمه‌نێ دابه‌شکرنێ"><i class="fas fa-retweet me-1"></i>گوهورین</button>
+                  </div>
+                  <hr class="mt-2"><div id="teacherClassesContainer" style="max-height: 500px; overflow-y: auto;"></div>
+              </div>
+              <div class="tab-pane fade" id="availability-tab-pane" role="tabpanel" tabindex="0">
+                  <div id="teacherAvailabilityGrid"></div>
+              </div>
             </div>
-            <hr class="mt-2"><div id="teacherClassesContainer" style="max-height: 500px; overflow-y: auto;"></div></div></div></form></div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">داخستن</button><button type="submit" form="teacherForm" class="btn btn-primary">پاشه‌كه‌وتكرن</button></div></div></div></div>
+        </div></div></form></div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">داخستن</button><button type="submit" form="teacherForm" class="btn btn-primary">پاشه‌كه‌وتكرن</button></div></div></div></div>
 
     <!-- Settings Modal -->
     <div class="modal fade" id="settingsModal" tabindex="-1">
@@ -308,6 +321,20 @@
                         <div class="mb-3">
                             <label for="principalName" class="form-label">ناڤێ رێڤه‌به‌ری</label>
                             <input type="text" class="form-control" id="principalName" placeholder="ناڤێ رێڤه‌به‌ری بنڤیسە">
+                        </div>
+                        <hr>
+                        <h6 class="fw-bold text-primary">رێكخستنێن خشتێ حەفتیانە</h6>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold" title="عدد الحصص في اليوم">هەژمارا وانەیان د رۆژێدا</label>
+                                <input type="number" class="form-control" id="settingPeriodsPerDay" min="1" max="10" value="7">
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label class="form-label fw-bold" title="أيام الدوام للجدول">رۆژێن دەوامێ</label>
+                                <div id="settingWorkDaysContainer" class="d-flex flex-wrap gap-2 mt-1">
+                                    <!-- checkboxes generated by JS -->
+                                </div>
+                            </div>
                         </div>
                         <hr>
                         <h6 class="fw-bold">رێكخستنا خشتێن زێده‌</h6>
@@ -331,11 +358,27 @@
         </div>
     </div>
     
+    <!-- Class Summary Modal -->
+    <div class="modal fade" id="classSummaryModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="classSummaryModalTitle">پوختەیا پولێ</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="classSummaryModalBody">
+                    <!-- Class summary content will be generated here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
+
     // --- Global Scope & Constants ---
     let allSchedules = {};
     let activeScheduleName = '';
@@ -347,12 +390,10 @@
     let currentEditingTeacher = null;
     
     const PREDEFINED_SUBJECTS = ['كوردی', 'بیركاری', 'ئینگلیزی', 'زانست', 'عربی', 'كومه‌لایه‌تی', 'ئاين', 'كارامه‌ی', 'هونه‌ر', 'وه‌رزش'];
+    const ALL_DAYS_KURDISH = ['شەمب', 'ئێك شەمب', 'دوو شەمب', 'سێ شەمب', 'چوار شەمب', 'پێنج شەمب', 'ئەینی'];
     
-    // --- DOM Element Caching ---
-    const searchInput = document.getElementById('searchInput');
-    const themeSwitcher = document.getElementById('themeSwitcher');
-    const teacherModalEl = document.getElementById('teacherModal');
-    const settingsModalEl = document.getElementById('settingsModal');
+    // --- DOM Element Caching (will be initialized in DOMContentLoaded) ---
+    let searchInput, themeSwitcher, teacherModalEl, settingsModalEl;
 
     // --- Utility Functions ---
     const showToast = (message, icon = 'success') => { 
@@ -373,7 +414,7 @@
                 columns: ['١ج', '١د', '٢ج'], 
                 teachers: [{ id: 1, name: 'سمیر حسین محمود', certificate: 'دبلوم', jobTitle: 'ماموستا', specialization: 'كوردی', subjects: [{ name: 'كوردی', periods: 16 }, { name: 'ئاين', periods: 4 }], classes: { '١ج': { 'كوردی': 8, 'ئاين': 2 }, '١د': { 'كوردی': 8, 'ئاين': 2 } } }],
                 nisab: {},
-                settings: { principalName: 'مسعود لاوند تحلو', studentTableRows: 6, leaveTableRows: 4, studentTableData: [], leaveTableData: [] }
+                settings: { principalName: 'مسعود لاوند تحلو', studentTableRows: 6, leaveTableRows: 4, studentTableData: [], leaveTableData: [], periodsPerDay: 7, workDays: ['ئێك شەمب', 'دوو شەمب', 'سێ شەمب', 'چوار شەمب', 'پێنج شەمب'] }
             };
             activeScheduleName = defaultName;
         }
@@ -384,10 +425,12 @@
             const schedule = allSchedules[scheduleName];
             schedule.nisab = schedule.nisab || {};
             if (!schedule.settings) {
-                schedule.settings = { principalName: '', studentTableRows: 6, leaveTableRows: 4, studentTableData: [], leaveTableData: [] };
+                schedule.settings = { principalName: '', studentTableRows: 6, leaveTableRows: 4, studentTableData: [], leaveTableData: [], periodsPerDay: 7, workDays: ['ئێك شەمب', 'دوو شەمب', 'سێ شەمب', 'چوار شەمب', 'پێنج شەمب'] };
             } else {
                 schedule.settings.studentTableData = schedule.settings.studentTableData || [];
                 schedule.settings.leaveTableData = schedule.settings.leaveTableData || [];
+                schedule.settings.periodsPerDay = schedule.settings.periodsPerDay || 7;
+                schedule.settings.workDays = schedule.settings.workDays || ['ئێك شەمب', 'دوو شەمب', 'سێ شەمب', 'چوار شەمب', 'پێنج شەمب'];
             }
         }
         saveData();
@@ -442,10 +485,11 @@
     // --- App Rendering ---
     function renderApp(filter = '') {
         if (!activeScheduleName || !allSchedules[activeScheduleName]) return;
-        renderDistributionTable(filter);
+        renderDistributionTable(filter || '');
         renderAdditionalTables();
         renderStatisticsTab(); 
         renderNisabTab(); 
+        if (typeof initTimetableTab === 'function') initTimetableTab();
     }
     
     // --- Distribution Tab Functions ---
@@ -478,7 +522,7 @@
             <thead class="table-light">
                 <tr id="table-head-row">
                     <th class="no-print"></th><th>ز</th><th>ناڤێ ماموستایان</th><th>بروانامه</th><th>نیشانا کاری</th><th>بسپور</th><th>بابه ت</th>
-                    ${schedule.columns.map(col => `<th class="column-header" data-col-name="${col}">${col}<button class="btn-delete-col no-print" onclick="deleteColumn('${col}')" title="ژێبرنا پولا"><i class="fas fa-trash-alt"></i></button></th>`).join('')}
+                    ${schedule.columns.map(col => `<th class="column-header" data-col-name="${col}"><span style="cursor: pointer; text-decoration: underline; color: var(--bs-primary);" onclick="showClassSummary('${col}')" title="دیتنا پوختەیا پولێ">${col}</span><button class="btn-delete-col no-print" onclick="deleteColumn('${col}')" title="ژێبرنا پولا"><i class="fas fa-trash-alt"></i></button></th>`).join('')}
                     <th>ژ به‌هرا</th><th class="no-print">كاركردن</th>
                 </tr>
             </thead>
@@ -496,7 +540,7 @@
     function renderTeacherTbodyDetailed(teacher, columns, teacherIndex) {
         const numSubjects = teacher.subjects.length || 1;
         const rowspanAttr = `rowspan="${numSubjects}"`;
-        const totalDistributed = columns.reduce((s, c) => s + (teacher.classes?.[c] ? Object.values(teacher.classes[c]).reduce((a, b) => a + b, 0) : 0), 0);
+        const totalDistributed = columns.reduce((s, c) => s + (teacher.classes?.[c] ? Object.values(teacher.classes[c]).reduce((a, b) => a + parseInt(b, 10), 0) : 0), 0);
         
         if (teacher.subjects.length === 0) {
             return `<tbody data-teacher-id="${teacher.id}"><tr><td class="drag-handle no-print"><i class="fas fa-grip-vertical"></i></td><td>${teacherIndex + 1}</td><td>${teacher.name || ''}</td><td>${teacher.certificate || ''}</td><td>${teacher.jobTitle || ''}</td><td>${teacher.specialization || ''}</td><td></td>${columns.map(() => `<td></td>`).join('')}<td><span class="badge bg-primary fs-6">0</span></td><td class="no-print"><button class="btn btn-sm btn-outline-primary" onclick="openTeacherModal(${teacher.id})"><i class="fas fa-edit"></i></button><button class="btn btn-sm btn-outline-danger" onclick="deleteTeacher(${teacher.id})"><i class="fas fa-trash"></i></button></td></tr></tbody>`;
@@ -523,7 +567,7 @@
     }
 
     function renderTeacherRowSimple(teacher, columns, index) {
-        const distributed = columns.reduce((s, c) => s + (teacher.classes?.[c] ? Object.values(teacher.classes[c]).reduce((a, b) => a + b, 0) : 0), 0);
+        const distributed = columns.reduce((s, c) => s + (teacher.classes?.[c] ? Object.values(teacher.classes[c]).reduce((a, b) => a + parseInt(b, 10), 0) : 0), 0);
         const teacherSubjects = teacher.subjects.length > 0 ? teacher.subjects : [{ name: '', periods: '' }];
 
         const subjectsCellHtml = teacherSubjects.map(s => `<div class="subject-entry">${s.name ? `${s.name} (${s.periods})` : '&nbsp;'}</div>`).join('');
@@ -550,7 +594,7 @@
 
     function renderFooter(schedule) {
         if (schedule.columns.length === 0) return '';
-        const totals = schedule.columns.map(c => schedule.teachers.reduce((s, t) => s + (t.classes?.[c] ? Object.values(t.classes[c]).reduce((a, b) => a + b, 0) : 0), 0));
+        const totals = schedule.columns.map(c => schedule.teachers.reduce((s, t) => s + (t.classes?.[c] ? Object.values(t.classes[c]).reduce((a, b) => a + parseInt(b, 10), 0) : 0), 0));
         const grandTotal = totals.reduce((a, b) => a + b, 0);
         return `<tr class="table-light fw-bold"><td class="no-print"></td><td colspan="6" class="text-end">کۆی گشتی:</td>${totals.map(t => `<td>${t}</td>`).join('')}<td>${grandTotal}</td><td class="no-print"></td></tr>`;
     }
@@ -668,14 +712,108 @@
     }
 
     // --- Printing Functions ---
-    const printStyleTemplate = `<style>body{font-family:"Noto Kufi Arabic",sans-serif;-webkit-print-color-adjust:exact!important;color-adjust:exact!important;}.table{width:100%;border-collapse:collapse;font-size:7pt}.table th,.table td{border:1px solid #ccc!important;padding:1px 2px;text-align:center;white-space:normal;vertical-align:middle;}.table thead th{background-color:#f2f2f2!important;font-weight:bold}.table .badge{background-color:transparent!important;color:inherit!important;border:none!important;padding:0!important;font-size:inherit!important;font-weight:normal!important;}thead{display:table-header-group}tfoot{display:table-footer-group}hr{margin:2px 0!important;border-top:1px solid #ccc!important;}#additionalTablesContainer .table{margin-top:25px!important;font-size:9pt;}#additionalTablesContainer .table td{height:30px;}#managerSignature{margin-top:40px;text-align:center;}@page{size:landscape;margin:.5cm}</style>`;
+    function getPrintStyleTemplate(pageOrientation = 'landscape') {
+        return `<style>body{font-family:"Noto Kufi Arabic",sans-serif;-webkit-print-color-adjust:exact!important;color-adjust:exact!important;}.table{width:100%;border-collapse:collapse;font-size:7pt}.table th,.table td{border:1px solid #ccc!important;padding:1px 2px;text-align:center;white-space:normal;vertical-align:middle;}.table thead th{background-color:#f2f2f2!important;font-weight:bold}.table .badge{background-color:transparent!important;color:inherit!important;border:none!important;padding:0!important;font-size:inherit!important;font-weight:normal!important;}thead{display:table-header-group}tfoot{display:table-footer-group}hr{margin:2px 0!important;border-top:1px solid #ccc!important;}#additionalTablesContainer .table{margin-top:25px!important;font-size:9pt;}#additionalTablesContainer .table td{height:30px;}#managerSignature{margin-top:40px;text-align:center;}@page{size:${pageOrientation};margin:.5cm}</style>`;
+    }
 
-    function printWithContent(title, contentHTML) {
+    function buildStyledHtmlDocument(title, contentHTML, options = {}) {
+        const { orientation = 'landscape' } = options;
+        return `<!DOCTYPE html><html><head><meta charset="utf-8"><title>${title}</title><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">${getPrintStyleTemplate(orientation)}</head><body dir="rtl">${contentHTML}</body></html>`;
+    }
+
+    function sanitizeDownloadFileName(fileName) {
+        return fileName.replace(/[<>:"/\\|?*]+/g, '_').replace(/\s+/g, '_');
+    }
+
+    function downloadHTMLFile(title, contentHTML, options = {}) {
+        const { orientation = 'landscape', filename = `${sanitizeDownloadFileName(title)}.html` } = options;
+        const finalHTML = buildStyledHtmlDocument(title, contentHTML, { orientation });
+        const blob = new Blob([finalHTML], { type: 'text/html;charset=utf-8' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+    }
+
+    function printWithContent(title, contentHTML, options = {}) {
+        const { orientation = 'landscape' } = options;
         const printWindow = window.open('', '', 'height=800,width=1200');
-        printWindow.document.write(`<html><head><title>${title}</title><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">${printStyleTemplate}</head><body dir="rtl">${contentHTML}</body></html>`);
+        printWindow.document.write(buildStyledHtmlDocument(title, contentHTML, { orientation }));
         printWindow.document.close();
         printWindow.focus();
         setTimeout(() => printWindow.print(), 500);
+    }
+
+    function getCurrentDistributionHTML() {
+        const tableNode = document.querySelector("#tableContainer table");
+        if (!tableNode) return null;
+        const tableClone = tableNode.cloneNode(true);
+        tableClone.querySelectorAll(".no-print").forEach(el => el.remove());
+        return `<h3>دابەشکرنا وانان - ${activeScheduleName}</h3>${tableClone.outerHTML}`;
+    }
+
+    function getComprehensiveDistributionHTML() {
+        const schedule = allSchedules[activeScheduleName];
+        if (schedule.teachers.length === 0) return null;
+
+        const columnTotals = schedule.columns.reduce((acc, col) => ({ ...acc, [col]: 0 }), {});
+        let totalDistributedOfAll = 0, tbodyHTML = '';
+
+        schedule.teachers.forEach((teacher, index) => {
+            const numSubjects = teacher.subjects.length || 1;
+            const rowspanAttr = `rowspan="${numSubjects}"`;
+            const distributed = schedule.columns.reduce((s, c) => s + (teacher.classes?.[c] ? Object.values(teacher.classes[c]).reduce((a, b) => a + b, 0) : 0), 0);
+            totalDistributedOfAll += distributed;
+            schedule.columns.forEach(col => { if (teacher.classes?.[col]) { columnTotals[col] += Object.values(teacher.classes[col]).reduce((a, b) => a + b, 0); } });
+
+            if (teacher.subjects.length > 0) {
+                teacher.subjects.forEach((subject, subjectIndex) => {
+                    tbodyHTML += `<tr>`;
+                    if (subjectIndex === 0) {
+                        tbodyHTML += `<td ${rowspanAttr}>${index + 1}</td><td ${rowspanAttr} style="white-space:normal; min-width:220px; width:220px;">${teacher.name || ''}</td><td ${rowspanAttr}>${teacher.certificate || ''}</td><td ${rowspanAttr}>${teacher.specialization || ''}</td>`;
+                    }
+                    tbodyHTML += `<td style="white-space:normal;">${subject.name}: ${subject.periods}</td>`;
+                    schedule.columns.forEach(c => { tbodyHTML += `<td style="white-space:normal;">${teacher.classes?.[c]?.[subject.name] || ''}</td>` });
+                    if (subjectIndex === 0) {
+                        tbodyHTML += `<td ${rowspanAttr}>${distributed}</td>`;
+                    }
+                    tbodyHTML += `</tr>`;
+                });
+            } else {
+                tbodyHTML += `<tr><td>${index + 1}</td><td style="white-space:normal; min-width:220px; width:220px;">${teacher.name || ''}</td><td>${teacher.certificate || ''}</td><td>${teacher.specialization || ''}</td><td></td>${schedule.columns.map(() => `<td></td>`).join('')}<td>${distributed}</td></tr>`;
+            }
+        });
+
+        const tfootHTML = `<tfoot class="table-light fw-bold"><tr><td colspan="4" class="text-end">کۆی گشتی:</td><td></td>${schedule.columns.map(col => `<td>${columnTotals[col]}</td>`).join('')}<td>${totalDistributedOfAll}</td></tr></tfoot>`;
+        const tableHTML = `<table class="table table-bordered table-striped"><thead class="table-light"><tr><th>ز</th><th style="min-width:220px; width:220px;">ناڤێ ماموستای</th><th>بروانامه</th><th>بسپور</th><th>بابەت</th>${schedule.columns.map(c => `<th>${c}</th>`).join('')}<th>ژ بەهرا</th></tr></thead><tbody>${tbodyHTML}</tbody>${tfootHTML}</table>`;
+        return `<h3>راپۆرتا ماموستایان - ${activeScheduleName}</h3>${tableHTML}`;
+    }
+
+    function getSimpleDistributionHTML() {
+        const schedule = allSchedules[activeScheduleName];
+        if (schedule.teachers.length === 0) return null;
+
+        let tableHTML = '<table class="table table-bordered table-striped">';
+        tableHTML += `<thead class="table-light"><tr><th>ز</th><th>ناڤێ ماموستایان</th><th>بروانامه</th><th>نیشانا کاری</th><th>بسپور</th><th>بابه ت</th>${schedule.columns.map(c => `<th>${c}</th>`).join('')}<th>ژ بەهرا</th></tr></thead><tbody>`;
+        schedule.teachers.forEach((teacher, index) => {
+            const distributed = schedule.columns.reduce((s, c) => s + (teacher.classes?.[c] ? Object.values(teacher.classes[c]).reduce((a, b) => a + b, 0) : 0), 0);
+            const subjects = teacher.subjects.map(s => `<div>${s.name} (${s.periods})</div>`).join('');
+            tableHTML += `<tr><td>${index + 1}</td><td>${teacher.name || ''}</td><td>${teacher.certificate || ''}</td><td>${teacher.jobTitle || ''}</td><td>${teacher.specialization || ''}</td><td style="white-space:normal;">${subjects}</td>`;
+            schedule.columns.forEach(col => {
+                let classContent = '';
+                if (teacher.classes?.[col]) {
+                    classContent = Object.entries(teacher.classes[col]).map(([sub, p]) => `${sub}: ${p}`).join('<hr style="margin:2px 0">');
+                }
+                tableHTML += `<td>${classContent}</td>`;
+            });
+            tableHTML += `<td><span class="badge">${distributed}</span></td></tr>`;
+        });
+        const footerTotals = schedule.columns.map(c => schedule.teachers.reduce((s, t) => s + (t.classes?.[c] ? Object.values(t.classes[c]).reduce((a, b) => a + b, 0) : 0), 0));
+        tableHTML += `</tbody><tfoot class="table-light fw-bold"><tr><td colspan="6" class="text-end">کۆی گشتی:</td>${footerTotals.map(t => `<td>${t}</td>`).join('')}<td><span class="badge">${footerTotals.reduce((a,b)=>a+b,0)}</span></td></tr></tfoot></table>`;
+        return `<h3>دابەشكرنا وانان (سادە) - ${activeScheduleName}</h3>${tableHTML}`;
     }
 
     function printAllTables() {
@@ -683,10 +821,10 @@
         if (!printAreaNode) { showToast('هیچ تشتەك نینە بۆ چاپکرنێ.', 'error'); return; }
         
         const printAreaClone = printAreaNode.cloneNode(true);
-        printAreaClone.querySelectorAll(".no-print, [contenteditable='true']").forEach(el => {
-            el.classList.add('d-none');
-            if (el.isContentEditable) el.removeAttribute('contenteditable');
-        });
+        // Hide only .no-print elements
+        printAreaClone.querySelectorAll(".no-print").forEach(el => el.classList.add('d-none'));
+        // Strip contenteditable without hiding the cells (they contain the user's data)
+        printAreaClone.querySelectorAll("[contenteditable='true']").forEach(el => el.removeAttribute('contenteditable'));
         printWithContent(`چاپكرنا خشتان - ${activeScheduleName}`, printAreaClone.innerHTML);
     }
     
@@ -715,18 +853,21 @@
                 teacher.subjects.forEach((subject, subjectIndex) => {
                     tbodyHTML += `<tr>`;
                     if(subjectIndex === 0) {
-                        tbodyHTML += `<td ${rowspanAttr}>${index + 1}</td><td ${rowspanAttr} style="white-space:normal;">${teacher.name || ''}</td><td ${rowspanAttr}>${teacher.certificate || ''}</td><td ${rowspanAttr}>${teacher.specialization || ''}</td><td ${rowspanAttr}>${distributed}</td>`;
+                        tbodyHTML += `<td ${rowspanAttr}>${index + 1}</td><td ${rowspanAttr} style="white-space:normal; min-width:220px; width:220px;">${teacher.name || ''}</td><td ${rowspanAttr}>${teacher.certificate || ''}</td><td ${rowspanAttr}>${teacher.specialization || ''}</td>`;
                     }
                     tbodyHTML += `<td style="white-space:normal;">${subject.name}: ${subject.periods}</td>`;
                     schedule.columns.forEach(c => { tbodyHTML += `<td style="white-space:normal;">${teacher.classes?.[c]?.[subject.name] || ''}</td>` });
+                    if(subjectIndex === 0) {
+                        tbodyHTML += `<td ${rowspanAttr}>${distributed}</td>`;
+                    }
                     tbodyHTML += `</tr>`;
                 });
             } else {
-                 tbodyHTML += `<tr><td>${index + 1}</td><td style="white-space:normal;">${teacher.name || ''}</td><td>${teacher.certificate || ''}</td><td>${teacher.specialization || ''}</td><td>${distributed}</td><td></td>${schedule.columns.map(() => `<td></td>`).join('')}</tr>`;
+                 tbodyHTML += `<tr><td>${index + 1}</td><td style="white-space:normal; min-width:220px; width:220px;">${teacher.name || ''}</td><td>${teacher.certificate || ''}</td><td>${teacher.specialization || ''}</td><td></td>${schedule.columns.map(() => `<td></td>`).join('')}<td>${distributed}</td></tr>`;
             }
         });
-        const tfootHTML = `<tfoot class="table-light fw-bold"><tr> <td colspan="4" class="text-end">کۆی گشتی:</td> <td>${totalDistributedOfAll}</td> <td></td> ${schedule.columns.map(col => `<td>${columnTotals[col]}</td>`).join('')} </tr></tfoot>`;
-        const tableHTML = `<table class="table table-bordered table-striped"> <thead class="table-light"><tr><th>ز</th><th>ناڤێ ماموستای</th><th>بروانامه</th><th>بسپور</th><th>ژ به‌هرا</th><th>بابه‌ت</th>${schedule.columns.map(c => `<th>${c}</th>`).join('')}</tr></thead> <tbody>${tbodyHTML}</tbody> ${tfootHTML} </table>`;
+        const tfootHTML = `<tfoot class="table-light fw-bold"><tr> <td colspan="4" class="text-end">کۆی گشتی:</td> <td></td> ${schedule.columns.map(col => `<td>${columnTotals[col]}</td>`).join('')} <td>${totalDistributedOfAll}</td> </tr></tfoot>`;
+        const tableHTML = `<table class="table table-bordered table-striped"> <thead class="table-light"><tr><th>ز</th><th style="min-width:220px; width:220px;">ناڤێ ماموستای</th><th>بروانامه</th><th>بسپور</th><th>بابه‌ت</th>${schedule.columns.map(c => `<th>${c}</th>`).join('')}<th>ژ به‌هرا</th></tr></thead> <tbody>${tbodyHTML}</tbody> ${tfootHTML} </table>`;
         printWithContent(`راپۆرتا ماموستایان - ${activeScheduleName}`, `<h3>راپۆرتا ماموستایان - ${activeScheduleName}</h3>${tableHTML}`);
     }
     
@@ -753,7 +894,7 @@
     // --- Modal and Data Entry Functions (Refactored with Async/Await) ---
     async function createSchedule() {
         const { value: scheduleName, isConfirmed } = await Swal.fire({
-            title: 'ناڤ بۆ خشتێ نوی', input: 'text', showCancelButton: true, confirmButtonText: 'چێكرن',
+            title: 'ناڤ بۆ خشتێ نوی', input: 'text', showCancelButton: true, confirmButtonText: 'چێكرن', cancelButtonText: 'هه‌لوه‌شاندن',
             inputValidator: v => !v ? 'ناڤه‌كی بنڤیسە!' : allSchedules[v] ? 'ئه‌ڤ ناڤه‌ هه‌یه‌!' : null
         });
         if (isConfirmed && scheduleName) {
@@ -769,7 +910,7 @@
         const oldName = activeScheduleName;
         if (!oldName) return;
         const { value: newName, isConfirmed } = await Swal.fire({
-            title: 'گوهورینا ناڤێ خشتەی', input: 'text', inputValue: oldName, showCancelButton: true, confirmButtonText: 'پاشه‌كه‌وتكرن',
+            title: 'گوهورینا ناڤێ خشتەی', input: 'text', inputValue: oldName, showCancelButton: true, confirmButtonText: 'پاشه‌كه‌وتكرن', cancelButtonText: 'هه‌لوه‌شاندن',
             inputValidator: v => !v ? 'پێدڤیه‌ ناڤه‌كی بنڤیسی!' : (v !== oldName && allSchedules[v]) ? 'ئه‌ڤ ناڤه‌ پێشتر هه‌یه‌!' : null
         });
         if (isConfirmed && newName && newName !== oldName) {
@@ -833,7 +974,7 @@
 
     async function addColumn() {
         const { value: className, isConfirmed } = await Swal.fire({
-            title: "زیادکرنا پولا نوی", input: "text", showCancelButton: true, confirmButtonText: "زیادکرن",
+            title: "زیادکرنا پولا نوی", input: "text", showCancelButton: true, confirmButtonText: "زیادکرن", cancelButtonText: "هه‌لوه‌شاندن",
             inputValidator: v => !v ? 'ناڤه‌كی بنڤیسە!' : allSchedules[activeScheduleName].columns.includes(v) ? 'ئه‌ڤ پوله‌ هه‌یه‌!' : null
         });
         if (isConfirmed && className) {
@@ -848,7 +989,7 @@
         const { value: classNames, isConfirmed } = await Swal.fire({
             title: 'زیادکرنا چه‌ند پولان',
             html: `<textarea id="swal-classes-input" class="swal2-textarea" placeholder="ناڤێ پولا ١\nناڤێ پولا ٢"></textarea><small>هه‌ر ناڤه‌كی ل سه‌ر دێره‌كێ بنڤیسه‌.</small>`,
-            confirmButtonText: 'زیادکرن', showCancelButton: true,
+            confirmButtonText: 'زیادکرن', showCancelButton: true, cancelButtonText: 'هه‌لوه‌شاندن',
             preConfirm: () => document.getElementById('swal-classes-input').value.split('\n').map(s => s.trim()).filter(Boolean)
         });
         if (isConfirmed && classNames.length > 0) {
@@ -867,7 +1008,7 @@
 
     async function deleteColumn(colName) {
         const { isConfirmed } = await Swal.fire({
-            title: `ژێبرنا پولا "${colName}"`, icon: "warning", showCancelButton: true, confirmButtonText: "بەلێ، ژێببە!"
+            title: `ژێبرنا پولا "${colName}"`, icon: "warning", showCancelButton: true, confirmButtonText: "بەلێ، ژێببە!", cancelButtonText: "هه‌لوه‌شاندن"
         });
         if (isConfirmed) {
             const schedule = allSchedules[activeScheduleName];
@@ -922,6 +1063,8 @@
         
         document.getElementById("teacherClassesContainer").innerHTML = '';
         updateClassInputsInModal(teacher);
+        
+        renderAvailabilityGrid(teacher);
         
         form.onsubmit = (ev) => { ev.preventDefault(); saveTeacherData(teacher?.id); };
         teacherModalInstance.show();
@@ -1060,6 +1203,72 @@
         updateSubjectPeriodsFromClasses();
     }
     
+    function togglePeriodBlock(btn) {
+        if (btn.classList.contains('btn-outline-success')) {
+            btn.classList.replace('btn-outline-success', 'btn-danger');
+            btn.innerHTML = '<i class="fas fa-times"></i>';
+        } else {
+            btn.classList.replace('btn-danger', 'btn-outline-success');
+            btn.innerHTML = '<i class="fas fa-check"></i>';
+        }
+    }
+
+    function toggleDayOffSwitch(switchEl) {
+        const row = switchEl.closest('tr');
+        const buttons = row.querySelectorAll('.period-block-btn');
+        if (switchEl.checked) {
+            buttons.forEach(btn => {
+                btn.disabled = true;
+                btn.classList.replace('btn-outline-success', 'btn-danger');
+                btn.innerHTML = '<i class="fas fa-times"></i>';
+            });
+        } else {
+            buttons.forEach(btn => {
+                btn.disabled = false;
+                btn.classList.replace('btn-danger', 'btn-outline-success');
+                btn.innerHTML = '<i class="fas fa-check"></i>';
+            });
+        }
+    }
+
+    function renderAvailabilityGrid(teacher) {
+        const schedule = allSchedules[activeScheduleName];
+        const days = schedule.settings.workDays || ['ئێك شەمب', 'دوو شەمب', 'سێ شەمب', 'چوار شەمب', 'پێنج شەمب'];
+        const periodsCount = schedule.settings.periodsPerDay || 7;
+        const offDays = teacher?.offDays || [];
+        const blockedPeriods = teacher?.blockedPeriods || {};
+
+        let html = `<p class="text-muted small mb-2"><i class="fas fa-info-circle me-1 text-primary"></i>دیاری بكە كیش ل كیش روژ و وانە ماموستا نەشێت دەوامێ بكەت (إضغط على الحصة التي لا يمكن للمعلم التدريس فيها ليتم حظرها):</p>`;
+        html += `<div class="table-responsive"><table class="table table-bordered text-center align-middle user-select-none">`;
+        html += `<thead class="table-light"><tr><th>الروژ \\ حەسە</th>`;
+        for(let p=1; p<=periodsCount; p++) html += `<th>${p}</th>`;
+        html += `</tr></thead><tbody>`;
+
+        for(let d=0; d<days.length; d++) {
+            const day = days[d];
+            const isOff = offDays.includes(day);
+            html += `<tr><td class="fw-bold bg-light" style="width: 130px; padding: 5px;">
+                        <div class="form-check form-switch text-start m-0">
+                            <input class="form-check-input day-off-switch" type="checkbox" data-day="${day}" id="switch_${day.replace(/\s+/g,'_')}" ${isOff ? 'checked' : ''} onchange="toggleDayOffSwitch(this)">
+                            <label class="form-check-label small" for="switch_${day.replace(/\s+/g,'_')}">${day}</label>
+                        </div>
+                     </td>`;
+            for(let p=1; p<=periodsCount; p++) {
+                const isBlocked = isOff || (blockedPeriods[day] && blockedPeriods[day].includes(p));
+                const btnClass = isBlocked ? 'btn-danger' : 'btn-outline-success';
+                const icon = isBlocked ? '<i class="fas fa-times"></i>' : '<i class="fas fa-check"></i>';
+                html += `<td style="padding: 2px;">
+                            <button type="button" class="btn btn-sm ${btnClass} w-100 period-block-btn" data-day="${day}" data-period="${p}" ${isOff ? 'disabled' : ''} onclick="togglePeriodBlock(this)">
+                                ${icon}
+                            </button>
+                         </td>`;
+            }
+            html += `</tr>`;
+        }
+        html += `</tbody></table></div>`;
+        document.getElementById('teacherAvailabilityGrid').innerHTML = html;
+    }
+
     function getSelectValue(selectId, otherId) {
         const select = document.getElementById(selectId);
         return select.value === 'یێن دی' ? document.getElementById(otherId).value : select.value;
@@ -1068,12 +1277,28 @@
     function saveTeacherData(teacherId = null) {
         if (!document.getElementById("teacherName").value) return showToast("ناڤێ ماموستای بنڤیسە.", "error");
         
+        const offDays = [];
+        const blockedPeriods = {};
+        document.querySelectorAll('.day-off-switch').forEach(sw => {
+            const day = sw.dataset.day;
+            if (sw.checked) {
+                offDays.push(day);
+            } else {
+                const blockedBtns = sw.closest('tr').querySelectorAll('.period-block-btn.btn-danger');
+                if (blockedBtns.length > 0) {
+                    blockedPeriods[day] = Array.from(blockedBtns).map(b => parseInt(b.dataset.period, 10));
+                }
+            }
+        });
+
         const teacherData = {
             id: teacherId ? parseInt(teacherId, 10) : nextTeacherId,
             name: document.getElementById("teacherName").value,
             certificate: getSelectValue('teacherCertificateSelect', 'teacherCertificateOther'),
             jobTitle: getSelectValue('teacherJobTitleSelect', 'teacherJobTitleOther'),
             specialization: getSelectValue('teacherSpecializationSelect', 'teacherSpecializationOther'),
+            offDays: offDays,
+            blockedPeriods: blockedPeriods,
             subjects: [], classes: {}
         };
         
@@ -1110,7 +1335,7 @@
     async function deleteTeacher(teacherId) {
         const { isConfirmed } = await Swal.fire({
             title: "ژێبرنا ماموستای", text: "ئایا تو پشتراستی؟", icon: "warning",
-            showCancelButton: true, confirmButtonText: "بەلێ، ژێببە!"
+            showCancelButton: true, confirmButtonText: "بەلێ، ژێببە!", cancelButtonText: "هه‌لوه‌شاندن"
         });
         if (isConfirmed) {
             allSchedules[activeScheduleName].teachers = allSchedules[activeScheduleName].teachers.filter(t => t.id !== teacherId);
@@ -1122,11 +1347,21 @@
     
     // --- Settings Modal Functions ---
     function openSettingsModal() {
-        if (!settingsModalInstance) settingsModalInstance = new bootstrap.Modal(settingsModalEl);
+        if (!settingsModalInstance) settingsModalInstance = new bootstrap.Modal(document.getElementById('settingsModal'));
         const settings = allSchedules[activeScheduleName].settings;
         document.getElementById('principalName').value = settings.principalName || '';
         document.getElementById('studentTableRows').value = settings.studentTableRows || 6;
         document.getElementById('leaveTableRows').value = settings.leaveTableRows || 4;
+        document.getElementById('settingPeriodsPerDay').value = settings.periodsPerDay || 7;
+        
+        const workDaysContainer = document.getElementById('settingWorkDaysContainer');
+        workDaysContainer.innerHTML = ALL_DAYS_KURDISH.map(day => `
+            <div class="form-check form-switch form-check-inline">
+                <input class="form-check-input work-day-checkbox" type="checkbox" value="${day}" id="wd_${day.replace(/\s+/g,'_')}" ${(settings.workDays || []).includes(day) ? 'checked' : ''}>
+                <label class="form-check-label" for="wd_${day.replace(/\s+/g,'_')}">${day}</label>
+            </div>
+        `).join('');
+
         settingsModalInstance.show();
     }
 
@@ -1135,8 +1370,20 @@
         settings.principalName = document.getElementById('principalName').value;
         settings.studentTableRows = parseInt(document.getElementById('studentTableRows').value) || 6;
         settings.leaveTableRows = parseInt(document.getElementById('leaveTableRows').value) || 4;
+        settings.periodsPerDay = parseInt(document.getElementById('settingPeriodsPerDay').value) || 7;
+        
+        const checkboxes = document.querySelectorAll('.work-day-checkbox:checked');
+        settings.workDays = Array.from(checkboxes).map(cb => cb.value);
+        if (settings.workDays.length === 0) {
+            showToast('پێدڤیه‌ لایه‌نی كێم رۆژه‌كێ دیار بكه‌ی!', 'error');
+            return;
+        }
+
         saveData();
         renderAdditionalTables();
+        if (document.getElementById('timetable-tab-pane').classList.contains('active')) {
+            renderTimetableGrid();
+        }
         settingsModalInstance.hide();
         showToast('رێكخستن هاتنه‌ پاشه‌كه‌وتكرن.');
     }
@@ -1170,71 +1417,1640 @@
     
     // --- Event Listeners & App Start ---
     document.addEventListener('DOMContentLoaded', () => {
-        const mainContainer = document.querySelector('.main-container');
-        const welcomeScreen = document.getElementById('welcome-screen');
-        const startButton = document.getElementById('startButton');
-        const welcomeCard = document.querySelector('.welcome-card');
-
-        if (sessionStorage.getItem('hasVisitedInSession')) {
-            welcomeScreen.style.display = 'none';
-            mainContainer.style.display = 'block';
-        } else {
-            if(welcomeScreen && welcomeCard) {
-                welcomeScreen.addEventListener('mousemove', (e) => {
-                    const { left, top, width, height } = welcomeScreen.getBoundingClientRect();
-                    const x = (e.clientX - left) / width - 0.5;
-                    const y = (e.clientY - top) / height - 0.5;
-                    welcomeCard.style.transform = `rotateX(${-y * 20}deg) rotateY(${x * 20}deg) scale(1.05)`;
-                });
-                welcomeScreen.addEventListener('mouseleave', () => {
-                    welcomeCard.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
-                });
-            }
-        }
-
-        startButton?.addEventListener('click', () => {
-            sessionStorage.setItem('hasVisitedInSession', 'true');
-            welcomeScreen.classList.add('hidden');
-            setTimeout(() => { mainContainer.style.display = 'block'; }, 600); 
-        });
+        // Initialize DOM element caching
+        searchInput = document.getElementById('searchInput');
+        themeSwitcher = document.getElementById('themeSwitcher');
+        teacherModalEl = document.getElementById('teacherModal');
+        settingsModalEl = document.getElementById('settingsModal');
         
+        const mainContainer = document.querySelector('.main-container');
+        if (mainContainer) mainContainer.style.display = 'block';
+
         const savedTheme = localStorage.getItem('theme') || 'light';
         document.body.setAttribute('data-bs-theme', savedTheme);
         themeSwitcher.checked = savedTheme === 'dark';
 
         loadData();
         renderApp();
+        
+        // Attach event listeners after DOM is ready
+        if (searchInput) searchInput.addEventListener('input', (e) => renderDistributionTable(e.target.value));
+        if (themeSwitcher) themeSwitcher.addEventListener('change', () => { 
+            const theme = themeSwitcher.checked ? 'dark' : 'light'; 
+            document.body.setAttribute('data-bs-theme', theme); 
+            localStorage.setItem('theme', theme); 
+        });
+        
+        [teacherModalEl, settingsModalEl].forEach(modalEl => {
+            if (modalEl) {
+                modalEl.addEventListener('show.bs.modal', () => document.body.classList.add('modal-open'));
+                modalEl.addEventListener('hidden.bs.modal', () => document.body.classList.remove('modal-open'));
+            }
+        });
+        
+        // Attach tab listeners
+        document.querySelector('#statistics-tab')?.addEventListener('shown.bs.tab', renderStatisticsTab);
+        document.querySelector('#nisab-tab')?.addEventListener('shown.bs.tab', renderNisabTab);
     });
-
-    searchInput.addEventListener('input', (e) => renderDistributionTable(e.target.value));
-    themeSwitcher.addEventListener('change', () => { 
-        const theme = themeSwitcher.checked ? 'dark' : 'light'; 
-        document.body.setAttribute('data-bs-theme', theme); 
-        localStorage.setItem('theme', theme); 
-    });
-    
-    [teacherModalEl, settingsModalEl].forEach(modalEl => {
-        modalEl.addEventListener('show.bs.modal', () => document.body.classList.add('modal-open'));
-        modalEl.addEventListener('hidden.bs.modal', () => document.body.classList.remove('modal-open'));
-    });
-
-    document.querySelector('#statistics-tab')?.addEventListener('shown.bs.tab', renderStatisticsTab);
-    document.querySelector('#nisab-tab')?.addEventListener('shown.bs.tab', renderNisabTab);
     
     // Unchanged Functions (Statistics & Nisab Rendering)
     function getGradeFromClassName(className) { if (!className) return null; const match = className.match(/[٠-٩0-9]+/); return match ? match[0] : null; }
-    function renderNisabTab() { const container = document.getElementById('nisab-tab-pane'); const schedule = allSchedules[activeScheduleName]; const teacherSubjects = new Set(schedule.teachers.flatMap(t => t.subjects.map(s => s.name))); const allSubjects = [...new Set([...PREDEFINED_SUBJECTS, ...teacherSubjects])].sort(); const allGrades = [...new Set(schedule.columns.map(getGradeFromClassName).filter(Boolean))].sort(); if (allGrades.length === 0) { container.innerHTML = `<div class="empty-state"><i class="fas fa-tasks fa-3x mb-3"></i><h5>پشکا نصابی ڤالایە</h5><p>پێدڤیه‌ پولان زیاد بكه‌ی دا بشێی نصابا وانان دیار بكه‌ی.</p></div>`; return; } let tableHTML = `<div class="d-flex justify-content-between align-items-center my-3"><h5 class="mb-0">دیارکرنا حصصێن پێدڤی بۆ هەر قۆناغەکێ</h5><button class="btn btn-info btn-sm" onclick="applyNisab()"><i class="fas fa-magic me-2"></i>جێبەجێکرنا نصابی لسەر خشتەی</button></div><div class="table-responsive"><table class="table table-bordered nisab-table"><thead class="table-light"><tr><th>بابەت / قۆناغ</th>${allGrades.map(g => `<th>قۆناغا ${g}</th>`).join('')}</tr></thead><tbody>${allSubjects.map(s => `<tr><td class="fw-bold">${s}</td>${allGrades.map(g => `<td><input type="number" class="form-control form-control-sm mx-auto" min="0" data-subject="${s}" data-grade="${g}" value="${schedule.nisab?.[s]?.[g] || ''}" onchange="saveNisabValue(this)"></td>`).join('')}</tr>`).join('')}</tbody></table></div>`; container.innerHTML = tableHTML; }
+    function renderNisabTab() { const container = document.getElementById('nisab-tab-pane'); const schedule = allSchedules[activeScheduleName]; const teacherSubjects = new Set(schedule.teachers.flatMap(t => t.subjects.map(s => s.name))); const allSubjects = [...new Set([...PREDEFINED_SUBJECTS, ...teacherSubjects])].sort(); const allGrades = [...new Set(schedule.columns.map(getGradeFromClassName).filter(Boolean))].sort((a,b) => parseInt(a) - parseInt(b)); if (allGrades.length === 0) { container.innerHTML = `<div class="empty-state"><i class="fas fa-tasks fa-3x mb-3"></i><h5>پشکا نصابی ڤالایە</h5><p>پێدڤیه‌ پولان زیاد بكه‌ی دا بشێی نصابا وانان دیار بكه‌ی.</p></div>`; return; } let tableHTML = `<div class="d-flex justify-content-between align-items-center my-3"><h5 class="mb-0">دیارکرنا حصصێن پێدڤی بۆ هەر قۆناغەکێ</h5><button class="btn btn-info btn-sm" onclick="applyNisab()"><i class="fas fa-magic me-2"></i>جێبەجێکرنا نصابی لسەر خشتەی</button></div><div class="table-responsive"><table class="table table-bordered nisab-table"><thead class="table-light"><tr><th>بابەت / قۆناغ</th>${allGrades.map(g => `<th>قۆناغا ${g}</th>`).join('')}</tr></thead><tbody>${allSubjects.map(s => `<tr><td class="fw-bold">${s}</td>${allGrades.map(g => `<td><input type="number" class="form-control form-control-sm mx-auto" min="0" data-subject="${s}" data-grade="${g}" value="${schedule.nisab?.[s]?.[g] || ''}" onchange="saveNisabValue(this)"></td>`).join('')}</tr>`).join('')}</tbody></table></div>`; container.innerHTML = tableHTML; }
     function saveNisabValue(input) { const schedule = allSchedules[activeScheduleName]; const { subject, grade } = input.dataset; const value = parseInt(input.value); if (!schedule.nisab[subject]) schedule.nisab[subject] = {}; if (value > 0) schedule.nisab[subject][grade] = value; else delete schedule.nisab[subject][grade]; saveData(); }
     async function applyNisab() { const { isConfirmed } = await Swal.fire({ title: 'جێبەجێکرنا نصابی', text: 'ئەڤ کارە دێ هەمی وانەیان لسەر پولان دابەش کەت لدویڤ نصابا تە دیارکری. بتنێ ئەو وانە دێ هێنە زێدەکرن یێن کو هەتا نوکە نەهاتینە دابەشکرن. ئایا پشتراستی؟', icon: 'info', showCancelButton: true, confirmButtonText: 'بەلێ، جێبەجێ بکە', cancelButtonText: 'نەخێر' }); if (isConfirmed) { const schedule = allSchedules[activeScheduleName]; let successLog = []; let warningLog = []; for (const subject in schedule.nisab) { for (const grade in schedule.nisab[subject]) { const periods = schedule.nisab[subject][grade]; if (!periods || periods <= 0) continue; let teacher = schedule.teachers.find(t => t.specialization === subject && t.subjects.some(s => s.name === subject)) || schedule.teachers.find(t => t.subjects.some(s => s.name === subject)); if (!teacher) { warningLog.push(`- هیچ ماموستایەک نەهاتە دیتن بۆ بابەتا "${subject}".`); continue; } const targetClasses = schedule.columns.filter(c => getGradeFromClassName(c) === grade); targetClasses.forEach(className => { if (!schedule.teachers.some(t => t.classes?.[className]?.[subject] > 0)) { teacher.classes = teacher.classes || {}; teacher.classes[className] = teacher.classes[className] || {}; teacher.classes[className][subject] = periods; successLog.push(`- ${periods} وانە ژ بابەتا "${subject}" بۆ پولا "${className}" هاتە دانان بۆ ماموستا "${teacher.name}".`); } }); } } saveData(); renderApp(searchInput.value); let summaryHTML = ''; if (successLog.length > 0) summaryHTML += `<h6>کارێن هاتینەکرن:</h6><ul class="text-start">${successLog.map(s => `<li>${s}</li>`).join('')}</ul>`; if (warningLog.length > 0) summaryHTML += `<h6 class="mt-3">تێبینی:</h6><ul class="text-start">${warningLog.map(w => `<li>${w}</li>`).join('')}</ul>`; if (summaryHTML === '') summaryHTML = 'هیچ گوهورینەکا نوی روو نەدا. هەمی وانە لدویڤ نصابی هاتبوونە دابەشکرن.'; Swal.fire('ئەنجام', summaryHTML, successLog.length > 0 ? 'success' : 'warning'); } }
     function renderStatisticsTab() { const container = document.getElementById('statistics-tab-pane'); const schedule = allSchedules[activeScheduleName]; if (!schedule || schedule.teachers.length === 0 || schedule.columns.length === 0) { container.innerHTML = '<div class="p-4"><div class="alert alert-warning">هیچ داتایه‌ك نینه‌ بۆ نیشاندانێ. پێدڤیه‌ ماموستا و پولان و وانان دابه‌ش بكه‌ی.</div></div>'; return; } const allSubjects = [...new Set([...PREDEFINED_SUBJECTS, ...new Set(schedule.teachers.flatMap(t => t.subjects.map(s => s.name)))])].sort(); const subjectStatus = allSubjects.map(subject => { const required = Object.entries(schedule.nisab[subject] || {}).reduce((sum, [grade, periods]) => sum + (periods * schedule.columns.filter(c => getGradeFromClassName(c) === grade).length), 0); const distributed = schedule.teachers.reduce((sum, t) => sum + schedule.columns.reduce((subSum, col) => subSum + (t.classes?.[col]?.[subject] || 0), 0), 0); return { name: subject, required, distributed }; }).filter(s => s.required > 0 || s.distributed > 0); const totalNisabRequired = subjectStatus.reduce((sum, s) => sum + s.required, 0); const totalDistributed = subjectStatus.reduce((sum, s) => sum + s.distributed, 0); const classDetails = schedule.columns.reduce((acc, colName) => { acc[colName] = { total: 0, subjects: {} }; schedule.teachers.forEach(t => { if (t.classes?.[colName]) { for(const subject in t.classes[colName]){ const periods = t.classes[colName][subject]; acc[colName].total += periods; acc[colName].subjects[subject] = (acc[colName].subjects[subject] || 0) + periods; } } }); return acc; }, {}); let distributionDetails = []; schedule.teachers.forEach(t => { for (const cN in t.classes) { for (const sN in t.classes[cN]) { if (t.classes[cN][sN] > 0) { distributionDetails.push({ className: cN, subjectName: sN, teacherName: t.name, periods: t.classes[cN][sN] }); } } } }); distributionDetails.sort((a,b) => a.className.localeCompare(b.className) || a.subjectName.localeCompare(b.subjectName)); const progressPercentage = totalNisabRequired > 0 ? (totalDistributed/totalNisabRequired)*100 : 0;
     let contentHTML = `<div class="p-2"><ul class="nav nav-tabs nav-fill mb-3" role="tablist"><li class="nav-item" role="presentation"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#stats-summary-pane" type="button"><i class="fas fa-tachometer-alt me-2"></i>خلاصة گشتی</button></li><li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#stats-teachers-pane" type="button"><i class="fas fa-chalkboard-teacher me-2"></i>دۆخی ماموستایان</button></li><li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#stats-subjects-pane" type="button"><i class="fas fa-book me-2"></i>دۆخی وانه‌کان</button></li><li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#stats-classes-pane" type="button"><i class="fas fa-school me-2"></i>دۆخی پۆله‌کان</button></li></ul>
-    <div class="tab-content p-2"><div class="tab-pane fade show active" id="stats-summary-pane" role="tabpanel"><h4 class="mb-3">خلاصة گشتی يا دابەشکرنێ</h4><div class="row text-center"><div class="col-md-4 mb-3"><div class="card shadow-sm h-100"><div class="card-body"><h6 class="card-title text-uppercase text-secondary">کۆی گشتی وانەیێن پێدڤی</h6><p class="fs-1 fw-bold text-primary mb-0">${totalNisabRequired}</p></div></div></div><div class="col-md-4 mb-3"><div class="card shadow-sm h-100"><div class="card-body"><h6 class="card-title text-uppercase text-secondary">وانەیێن دابەشکری</h6><p class="fs-1 fw-bold text-success mb-0">${totalDistributed}</p></div></div></div><div class="col-md-4 mb-3"><div class="card shadow-sm h-100"><div class="card-body"><h6 class="card-title text-uppercase text-secondary">وانەیێن ماین</h6><p class="fs-1 fw-bold text-danger mb-0">${totalNisabRequired - totalDistributed}</p></div></div></div></div><hr class="my-4"><h5 class="text-center">رێژا ته‌واوبوونێ</h5><div class="progress" style="height: 30px; font-size: 1rem;"><div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: ${progressPercentage}%">${Math.round(progressPercentage)}%</div></div></div>
+    <div class="tab-content p-2"><div class="tab-pane fade show active" id="stats-summary-pane" role="tabpanel"><h4 class="mb-3">خلاصة گشتی يا دابەشکرنێ</h4><div class="row text-center"><div class="col-md-4 mb-3"><div class="card shadow-sm h-100"><div class="card-body"><h6 class="card-title text-uppercase text-secondary">کۆی گشتی وانەیێن پێدڤی</h6><p class="fs-1 fw-bold text-primary mb-0">${totalNisabRequired}</p></div></div></div><div class="col-md-4 mb-3"><div class="card shadow-sm h-100"><div class="card-body"><h6 class="card-title text-uppercase text-secondary">وانەیێن دابەشکری</h6><p class="fs-1 fw-bold text-success mb-0">${totalDistributed}</p></div></div></div><div class="col-md-4 mb-3"><div class="card shadow-sm h-100"><div class="card-body"><h6 class="card-title text-uppercase text-secondary">وانەیێن ماین</h6><p class="fs-1 fw-bold ${totalNisabRequired - totalDistributed < 0 ? 'text-warning' : 'text-danger'} mb-0">${totalNisabRequired - totalDistributed < 0 ? 'زێدە ' + Math.abs(totalNisabRequired - totalDistributed) : totalNisabRequired - totalDistributed}</p></div></div></div></div><hr class="my-4"><h5 class="text-center">رێژا ته‌واوبوونێ</h5><div class="progress" style="height: 30px; font-size: 1rem;"><div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: ${Math.min(100, Math.max(0, progressPercentage))}%">${Math.round(progressPercentage)}%</div></div></div>
     <div class="tab-pane fade" id="stats-teachers-pane" role="tabpanel"><h4 class="mb-3">ورده‌كاری دابه‌شکرنا ماموستایان</h4><div class="row">${schedule.teachers.map((t) => { const required = t.subjects.reduce((sum, s) => sum + s.periods, 0); const distributed = Object.values(t.classes || {}).reduce((subSum, classObj) => subSum + Object.values(classObj).reduce((pSum, p) => pSum + p, 0), 0); const diff = distributed - required; let badgeClass = 'bg-success-subtle text-success-emphasis'; let statusText = 'تەواو'; if (diff < 0) { badgeClass = 'bg-warning-subtle text-warning-emphasis'; statusText = `نه‌ته‌واو (${-diff} ماینە)`; } else if (diff > 0) { badgeClass = 'bg-danger-subtle text-danger-emphasis'; statusText = `زێده‌ (${diff} زێدەنە)`; } const percentage = required > 0 ? Math.round((distributed / required) * 100) : (distributed > 0 ? 101 : 0); let progressClass = 'bg-success'; if (percentage > 100) progressClass = 'bg-danger'; else if (percentage < 100) progressClass = 'bg-warning'; const teacherAssignments = distributionDetails.filter(d => d.teacherName === t.name); let teacherDetailsHTML = teacherAssignments.length > 0 ? `<div class="table-responsive" style="max-height: 200px;"><table class="table table-sm table-hover"><thead><tr><th>پول</th><th>بابەت</th><th>وانە</th></tr></thead><tbody>${teacherAssignments.map(d => `<tr><td>${d.className}</td><td>${d.subjectName}</td><td>${d.periods}</td></tr>`).join('')}</tbody></table></div>` : `<div class="text-center p-3 text-muted">هیچ وانه‌یه‌ك نینه‌.</div>`; return `<div class="col-xl-6 mb-4"><div class="card h-100 shadow-sm"><div class="card-header d-flex justify-content-between align-items-center"><h6 class="mb-0 fw-bold"><i class="fas fa-user-tie me-2 text-primary"></i> ${t.name}</h6><span class="badge rounded-pill ${badgeClass}">${statusText}</span></div><div class="card-body p-3"><div class="row"><div class="col-sm-6"><ul class="list-unstyled small"><li class="mb-2"><i class="fas fa-award fa-fw me-2 text-muted"></i><strong>بروانامه:</strong> ${t.certificate||'N/A'}</li><li class="mb-2"><i class="fas fa-briefcase fa-fw me-2 text-muted"></i><strong>نیشانا کاری:</strong> ${t.jobTitle||'N/A'}</li><li class="mb-2"><i class="fas fa-atom fa-fw me-2 text-muted"></i><strong>بسپور:</strong> ${t.specialization||'N/A'}</li></ul></div><div class="col-sm-6"><ul class="list-unstyled small"><li class="mb-2 d-flex justify-content-between"><span><i class="fas fa-bullseye fa-fw me-2 text-muted"></i><strong>پێدڤی:</strong></span> <span class="fw-bold">${required}</span></li><li class="mb-2 d-flex justify-content-between"><span><i class="fas fa-check-circle fa-fw me-2 text-muted"></i><strong>دابەشکری:</strong></span> <span class="fw-bold">${distributed}</span></li><li class="mb-2 d-flex justify-content-between"><span><i class="fas fa-exchange-alt fa-fw me-2 text-muted"></i><strong>جیاوازی:</strong></span> <span class="fw-bold ${diff<0?'text-warning':(diff>0?'text-danger':'text-success')}">${diff>0?`+${diff}`:diff}</span></li></ul></div></div><div class="progress mt-1" style="height:10px;"><div class="progress-bar ${progressClass}" role="progressbar" style="width:${Math.min(percentage,100)}%"></div></div><hr>${teacherDetailsHTML}</div></div></div>`; }).join('')}</div></div>
     <div class="tab-pane fade" id="stats-subjects-pane" role="tabpanel"><h4 class="mb-3">دۆخی دابەشکرنا وانان (لدویڤ نصابی)</h4><div class="table-responsive"><table class="table table-striped table-hover"><thead class="table-light"><tr><th>بابەت</th><th>وانەیێن پێدڤی</th><th>وانەیێن دابەشکری</th><th>جیاوازی</th><th>رێژا ته‌واوبوونێ</th></tr></thead><tbody>${subjectStatus.map(s => { const diff = s.distributed - s.required; let diffClass = diff < 0 ? 'text-danger' : diff > 0 ? 'text-warning' : 'text-success'; const percentage = s.required > 0 ? Math.round((s.distributed / s.required) * 100) : (s.distributed > 0 ? 100 : 0); let progressClass = percentage < 50 ? 'bg-danger' : percentage < 100 ? 'bg-warning' : 'bg-success'; return `<tr><td>${s.name}</td><td>${s.required}</td><td>${s.distributed}</td><td class="fw-bold ${diffClass}">${diff > 0 ? '+' : ''}${diff}</td><td><div class="progress" style="height: 20px;"><div class="progress-bar ${progressClass}" role="progressbar" style="width: ${percentage}%">${percentage}%</div></div></td></tr>`; }).join('')}</tbody></table></div></div>
     <div class="tab-pane fade" id="stats-classes-pane" role="tabpanel"><h4 class="mb-3">دۆخی وانەیێن دابەشکری بۆ هەر پولەکێ (لدویڤ نصابی)</h4><div class="row">${Object.entries(classDetails).map(([className, classData]) => { const grade = getGradeFromClassName(className); const requiredSubjects = {}; if (grade && schedule.nisab) { for (const subject in schedule.nisab) { if (schedule.nisab[subject][grade]) requiredSubjects[subject] = schedule.nisab[subject][grade]; } } const allClassSubjects = [...new Set([...Object.keys(requiredSubjects), ...Object.keys(classData.subjects)])].sort(); let totalRequired = Object.values(requiredSubjects).reduce((a, b) => a + b, 0); let totalDistributedInClass = classData.total; let statusBadge = ''; if (totalRequired > 0) { if (totalDistributedInClass === totalRequired) statusBadge = `<span class="badge bg-success-subtle text-success-emphasis rounded-pill">تەواو</span>`; else if (totalDistributedInClass > totalRequired) statusBadge = `<span class="badge bg-warning-subtle text-warning-emphasis rounded-pill">زێدە</span>`; else statusBadge = `<span class="badge bg-danger-subtle text-danger-emphasis rounded-pill">نه‌ته‌واو</span>`; } return `<div class="col-xl-4 col-md-6 mb-4"><div class="card h-100 shadow-sm"><div class="card-header d-flex justify-content-between align-items-center"><h6 class="mb-0 fw-bold"><i class="fas fa-school me-2"></i>پولا ${className}</h6>${statusBadge}</div><div class="card-body p-0"><ul class="list-group list-group-flush"><li class="list-group-item d-flex justify-content-between fw-bold bg-light-subtle"><span>کۆی گشتی:</span><span>پێدڤی: ${totalRequired} | دابەشکری: ${totalDistributedInClass}</span></li>${allClassSubjects.length > 0 ? allClassSubjects.map(subject => { const required = requiredSubjects[subject] || 0; const distributed = classData.subjects[subject] || 0; let icon = ''; if (required > 0) { if (distributed === required) icon = '<i class="fas fa-check-circle text-success"></i>'; else if (distributed < required) icon = '<i class="fas fa-exclamation-circle text-warning"></i>'; else icon = '<i class="fas fa-arrow-alt-circle-up text-info"></i>'; } else if (distributed > 0) { icon = '<i class="fas fa-plus-circle text-primary"></i>'; } return `<li class="list-group-item d-flex justify-content-between align-items-center small"><div>${icon ? icon + ' ' : ''}${subject}</div><span><span class="badge rounded-pill bg-secondary-subtle text-secondary-emphasis fw-normal">پ: ${required}</span><span class="badge rounded-pill bg-primary-subtle text-primary-emphasis fw-normal">د: ${distributed}</span></span></li>`; }).join('') : `<li class="list-group-item text-center p-3 text-muted small">هیچ وانه‌یه‌ك نینه‌.</li>`}</ul></div></div></div>`; }).join('')}</div></div></div></div>`;
     container.innerHTML = contentHTML;
 }
 
-    </script>
+    function exportToExcel() {
+        const schedule = allSchedules[activeScheduleName];
+        if (!schedule || schedule.teachers.length === 0) {
+            showToast('هیچ داتایه‌ك نینه‌ بۆ هنارتنێ.', 'error');
+            return;
+        }
+
+        let tableToExport = document.querySelector("#tableContainer table");
+        let timetableTab = document.getElementById('timetable-tab-pane');
+        if (timetableTab && timetableTab.classList.contains('active')) {
+            tableToExport = document.querySelector("#timetableGridTable") || document.querySelector("#timetableGridContainer table");
+            // If viewing "All Classes" or "All Teachers", the container might have multiple tables. We wrap them in a temp div.
+            if (document.querySelectorAll("#timetableGridContainer table").length > 1) {
+                let tempWrapper = document.createElement("div");
+                document.querySelectorAll("#timetableGridContainer table").forEach(tbl => tempWrapper.appendChild(tbl.cloneNode(true)));
+                tableToExport = tempWrapper;
+            }
+        }
+        
+        if (!tableToExport) {
+            showToast('هیچ خشتەیەک نیە ل ڤێرە بۆ هنارتنێ.', 'error');
+            return;
+        }
+
+        let tableClone = tableToExport.cloneNode(true);
+        tableClone.querySelectorAll(".no-print, .btn-delete-col").forEach(el => el.remove());
+        
+        tableClone.querySelectorAll("th, td").forEach(el => {
+            el.style.border = "1pt solid windowtext";
+        });
+
+        let html = `
+        <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
+        <head>
+            <meta charset="utf-8">
+            <style>
+                table { border-collapse: collapse; width: 100%; direction: rtl; font-family: 'Arial', sans-serif; margin-bottom: 20px; }
+                th, td { padding: 5px; text-align: center; vertical-align: middle; }
+                th { background-color: #f2f2f2; font-weight: bold; }
+                .text-danger { color: #dc3545; }
+                .text-primary { color: #0d6efd; }
+                .text-muted { color: #6c757d; font-size: 0.8em; }
+                .bg-light { background-color: #f8f9fa; }
+                .fw-bold { font-weight: bold; }
+                .bg-dark { background-color: #212529; color: #fff; }
+                .bg-secondary { background-color: #6c757d; color: #fff; }
+            <\\/style>
+        <\\/head>
+        <body>
+            <h3>${activeScheduleName}</h3>
+            ${tableClone.outerHTML || tableClone.innerHTML}
+        <\\/body>
+        <\\/html>`;
+
+        const blob = new Blob([html], { type: 'application/vnd.ms-excel;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = `schedule_${activeScheduleName}_${new Date().toISOString().slice(0,10)}.xls`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+    }
+
+    let classSummaryModalInstance = null;
+    function showClassSummary(className) {
+        if (!classSummaryModalInstance) {
+            classSummaryModalInstance = new bootstrap.Modal(document.getElementById('classSummaryModal'));
+        }
+        
+        const schedule = allSchedules[activeScheduleName];
+        document.getElementById('classSummaryModalTitle').innerText = `پوختەیا پولا ${className}`;
+        
+        let totalPeriods = 0;
+        let subjectsListHTML = '<ul class="list-group list-group-flush mb-3">';
+        
+        schedule.teachers.forEach(teacher => {
+            if (teacher.classes?.[className]) {
+                for (const [subjectName, periods] of Object.entries(teacher.classes[className])) {
+                    if (periods > 0) {
+                        totalPeriods += periods;
+                        subjectsListHTML += `<li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div><i class="fas fa-book text-primary me-2"></i><strong>${subjectName}</strong><br><small class="text-muted"><i class="fas fa-user-tie me-1"></i>${teacher.name}</small></div>
+                            <span class="badge bg-primary rounded-pill fs-6">${periods}</span>
+                        </li>`;
+                    }
+                }
+            }
+        });
+        
+        if (totalPeriods === 0) {
+            subjectsListHTML += '<li class="list-group-item text-center text-muted">هیچ وانه‌یه‌ك نه‌هاتیه‌ دانان.</li>';
+        }
+        subjectsListHTML += '</ul>';
+
+        const grade = getGradeFromClassName(className);
+        let nisabHTML = '';
+        if (grade && schedule.nisab) {
+            let missingSubjects = [];
+            for (const subject in schedule.nisab) {
+                if (schedule.nisab[subject][grade]) {
+                    const required = schedule.nisab[subject][grade];
+                    let distributedForSubject = 0;
+                    schedule.teachers.forEach(t => {
+                         distributedForSubject += (t.classes?.[className]?.[subject] || 0);
+                    });
+                    
+                    if (distributedForSubject !== required) {
+                        const diff = distributedForSubject - required;
+                        if (diff < 0) {
+                            missingSubjects.push(`<span class="text-danger">${subject} (پێدڤی: ${required} | هەیە: ${distributedForSubject})</span>`);
+                        } else {
+                            missingSubjects.push(`<span class="text-warning">${subject} (زێدەیە ب ${diff} وانان)</span>`);
+                        }
+                    }
+                }
+            }
+            if (missingSubjects.length > 0) {
+                nisabHTML = `<div class="alert alert-warning p-2 small mt-3"><h6 class="alert-heading fw-bold mb-1"><i class="fas fa-exclamation-triangle me-1"></i>تێبینی ژ نصابی:</h6><ul class="mb-0 ps-3">${missingSubjects.map(m => `<li>${m}</li>`).join('')}</ul></div>`;
+            } else if (totalPeriods > 0) {
+                nisabHTML = `<div class="alert alert-success p-2 small mt-3"><i class="fas fa-check-circle me-1"></i>هەمی وانە لدویڤ نصابی هاتینە تەواوکرن ب درستی.</div>`;
+            }
+        }
+
+        const bodyHTML = `
+            <div class="text-center mb-4">
+                <h2 class="display-4 fw-bold text-primary mb-0">${totalPeriods}</h2>
+                <p class="text-muted mb-0">کۆی وانەیێن دابەشکری</p>
+            </div>
+            <h6 class="fw-bold border-bottom pb-2">وردەکاری وانەکان (لدي المعلمين)</h6>
+            <div style="max-height: 400px; overflow-y: auto;">
+                ${subjectsListHTML}
+            </div>
+            ${nisabHTML}
+        `;
+        
+        document.getElementById('classSummaryModalBody').innerHTML = bodyHTML;
+        classSummaryModalInstance.show();
+    }
+
+    // --- Cloud Sync ---
+    async function saveToCloud() {
+        Swal.fire({ title: 'تکایە چاوەڕێبە...', html: 'داتا دهێتە بارکرن بۆ هەورێ...', allowOutsideClick: false, didOpen: () => Swal.showLoading() });
+        const rawData = JSON.stringify({ allSchedules, activeScheduleName });
+        const compressedData = LZString.compressToBase64(rawData);
+        const payload = JSON.stringify({ data: compressedData });
+
+        try {
+            const response = await fetch("https://extendsclass.com/api/json-storage/bin", {
+                method: "POST", headers: { "Content-Type": "application/json" }, body: payload
+            });
+            if (!response.ok) throw new Error('Network error');
+            const result = await response.json();
+            const newCloudId = result.id;
+            
+            Swal.fire({
+                icon: 'success', title: 'ب سەرکەفتیانە هاتە هەڵگرتن',
+                html: `کودێ تە يێ هەورێ:<br><strong class="fs-4 text-primary font-monospace" style="user-select: all;">${newCloudId}</strong><br><br><small class="text-muted">ئەڤێ کودێ ل جهەکێ پاراستی هەڵگرە بۆ ڤەگەڕاندنا داتایان ل هەر ئامێرەکێ دي.</small>`,
+                confirmButtonText: 'کۆپی کرنا کودێ', showCancelButton: true, cancelButtonText: 'داخستن'
+            }).then((res) => { if (res.isConfirmed) { navigator.clipboard.writeText(newCloudId); showToast("کود هاتە کۆپیکرن"); } });
+        } catch(err) {
+            console.error(err);
+            Swal.fire('خەلەتی', 'نەشیا پەیوەندیێ ب راژەکارێ هەورێ بكەت.', 'error');
+        }
+    }
+
+    async function loadFromCloud() {
+        const { value: cloudId } = await Swal.fire({
+            title: 'ڤەگەڕاندن ژ هەورێ', input: 'text', inputLabel: 'کودێ تە يێ هەورێ بنڤیسە (Cloud ID)',
+            showCancelButton: true, confirmButtonText: 'ڤەگەڕاندن', cancelButtonText: 'هه‌لوه‌شاندن',
+            inputValidator: (v) => { if (!v) return 'پێدڤیه‌ کودێ بنڤیسی!'; }
+        });
+        if (cloudId) {
+            Swal.fire({ title: 'تکایە چاوەڕێبە...', html: 'داتا دهێتە دابەزاندن...', allowOutsideClick: false, didOpen: () => Swal.showLoading() });
+            try {
+                const response = await fetch(`https://extendsclass.com/api/json-storage/bin/${cloudId}`);
+                if (!response.ok) throw new Error('Not Found');
+                let data = await response.json();
+                
+                if (data.data) {
+                    const decompressed = LZString.decompressFromBase64(data.data);
+                    if (decompressed) data = JSON.parse(decompressed);
+                }
+
+                if (data.allSchedules && data.activeScheduleName) {
+                    allSchedules = data.allSchedules; activeScheduleName = data.activeScheduleName;
+                    saveData(); renderApp();
+                    Swal.fire('ب سەرکەفتیانە', 'زانیاری ژ هەورێ هاتنە ڤەگەڕاندن', 'success');
+                } else { Swal.fire('خەلەتی', 'داتایێن کودێ نەدرستن.', 'error'); }
+            } catch(err) { console.error(err); Swal.fire('خەلەتی', 'کود خەلەتە يان پەیوەندی نەما.', 'error'); }
+        }
+    }
+
+    function resetCloudSync() {
+        localStorage.removeItem('cloudSyncId');
+        showToast("پەیوەندیا هەورێ هاتە هەلوەشاندن. نها داتا دێ وەک کۆدەکێ نوی هێتە بارکرن", "info");
+    }
+
+    // --- Weekly Timetable Functions ---
+    let sortables = [];
+
+    function initTimetableTab() {
+        if (!allSchedules[activeScheduleName].timetables) {
+            allSchedules[activeScheduleName].timetables = {};
+        }
+        const classSelect = document.getElementById('timetableClassSelect');
+        const teacherSelect = document.getElementById('timetableTeacherSelect');
+        const schedule = allSchedules[activeScheduleName];
+        
+        classSelect.innerHTML = `<option value="all_classes">هەمی پول (الكل)</option>` + schedule.columns.map(c => `<option value="${c}">${c}</option>`).join('');
+        teacherSelect.innerHTML = `<option value="all_teachers">هەمی ماموستا (الكل)</option>` + schedule.teachers.map(t => `<option value="${t.name}">${t.name}</option>`).join('');
+        
+        if (schedule.columns.length > 0) renderTimetableGrid();
+    }
+
+    function changeTimetableView() {
+        const mode = document.querySelector('input[name="ttViewMode"]:checked').value;
+        const classSelect = document.getElementById('timetableClassSelect');
+        const teacherSelect = document.getElementById('timetableTeacherSelect');
+        const unassignedCol = document.getElementById('unassignedCol');
+        const gridCol = document.getElementById('gridCol');
+        const autoBtn = document.getElementById('btnAutoDistribute');
+        const clearBtn = document.getElementById('btnClearTimetable');
+
+        unassignedCol.classList.add('d-none');
+        classSelect.classList.add('d-none');
+        teacherSelect.classList.add('d-none');
+        autoBtn.classList.add('d-none');
+        clearBtn.classList.add('d-none');
+        gridCol.className = 'col-md-12';
+
+        if (mode === 'class') {
+            classSelect.classList.remove('d-none');
+            unassignedCol.classList.remove('d-none');
+            autoBtn.classList.remove('d-none');
+            clearBtn.classList.remove('d-none');
+            gridCol.className = 'col-md-9';
+        } else if (mode === 'teacher') {
+            teacherSelect.classList.remove('d-none');
+        }
+        
+        renderTimetableGrid();
+    }
+
+    function renderTimetableGrid() {
+        const mode = document.querySelector('input[name="ttViewMode"]:checked').value;
+        const schedule = allSchedules[activeScheduleName];
+        const container = document.getElementById('timetableGridContainer');
+        const days = schedule.settings.workDays || ['ئێك شەمب', 'دوو شەمب', 'سێ شەمب', 'چوار شەمب', 'پێنج شەمب'];
+        const periodsCount = schedule.settings.periodsPerDay || 7;
+        
+        sortables.forEach(s => s.destroy()); sortables = [];
+
+        if (mode === 'class') {
+            const className = document.getElementById('timetableClassSelect').value;
+            if (!className) return;
+            if (className === "all_classes") {
+                document.getElementById('unassignedCol').classList.remove('d-none');
+                document.getElementById('gridCol').className = 'col-md-9';
+
+                let periodHeaders = '<th style="width: 12%;">الروژ \\ حەسە</th>';
+                for(let p=1; p<=periodsCount; p++) periodHeaders += '<th style="width: ' + (88/periodsCount) + '%;">'+p+'</th>';
+
+                let finalHTML = '<div class="d-flex justify-content-center align-items-center mb-4 px-3"><h3 class="text-primary mb-0">خشتێ هەمی پولان</h3>' +
+'</div><div>';
+                
+                schedule.columns.forEach(cName => {
+                    let h = '<div class="mb-4"><h5 class="text-center mt-4 mb-2 text-secondary fw-bold">پولا '+cName+'</h5>' +
+                                '<table class="table table-bordered text-center align-middle" style="page-break-inside: avoid;">' +
+                                '<thead class="table-secondary"><tr>'+periodHeaders+'</tr></thead><tbody>';
+                    for (let d = 0; d < days.length; d++) {
+                        h += '<tr><td class="fw-bold bg-light align-middle">'+days[d]+'</td>';
+                        for (let p = 1; p <= periodsCount; p++) {
+                            h += '<td class="timetable-cell bg-white" data-day="'+d+'" data-period="'+p+'" data-class="'+cName+'" style="height: 60px; min-width: 60px;">';
+                            const item = schedule.timetables?.[cName]?.[d]?.[p];
+                            if (item) {
+                                h += '<div class="timetable-item mb-0 bg-white border border-secondary rounded shadow-sm text-center" style="cursor: grab;" data-subject="'+item.subject+'" data-teacher="'+item.teacher+'" data-id="'+item.id+'" data-class="'+cName+'"><div class="fw-bold text-primary" style="font-size: 0.85rem;">'+item.subject+'</div><div class="text-muted" style="font-size: 0.75rem;">'+item.teacher+'</div></div>';
+                            }
+                            h += '</td>';
+                        }
+                        h += '</tr>';
+                    }
+                    h += '</tbody></table></div>';
+                    finalHTML += h;
+                });
+                finalHTML += '</div>';
+                container.innerHTML = finalHTML;
+            } else {
+                document.getElementById('unassignedCol').classList.remove('d-none');
+                document.getElementById('gridCol').className = 'col-md-9';
+
+                if (!schedule.timetables) schedule.timetables = {};
+                if (!schedule.timetables[className]) schedule.timetables[className] = {};
+
+                let periodHeaders = '<th style="width: 12%;">الروژ \\ حەسە</th>';
+                for(let p=1; p<=periodsCount; p++) periodHeaders += '<th style="width: ' + (88/periodsCount) + '%;">'+p+'</th>';
+
+                let h = '<h4 class="text-center mb-3 text-primary" id="timetableGridTitle">خشتێ حەفتیانە بو پولا '+className+'</h4>' +
+                            '<table class="table table-bordered text-center align-middle" id="timetableGridTable">' +
+                                '<thead class="table-secondary"><tr>'+periodHeaders+'</tr></thead>' +
+                                '<tbody id="timetableGridBody">';
+                for (let d = 0; d < days.length; d++) {
+                    h += '<tr><td class="fw-bold bg-light align-middle">' + days[d] + '</td>';
+                    for (let p = 1; p <= periodsCount; p++) {
+                        h += '<td class="timetable-cell bg-white" data-day="'+d+'" data-period="'+p+'" data-class="'+className+'">';
+                        const item = schedule.timetables[className]?.[d]?.[p];
+                        if (item) {
+                            h += '<div class="timetable-item mb-0 bg-white border border-secondary rounded shadow-sm text-center" style="cursor: grab;" data-subject="'+item.subject+'" data-teacher="'+item.teacher+'" data-id="'+item.id+'" data-class="'+className+'"><div class="fw-bold text-primary" style="font-size: 0.85rem;">'+item.subject+'</div><div class="text-muted" style="font-size: 0.75rem;">'+item.teacher+'</div></div>';
+                        }
+                        h += '</td>';
+                    }
+                    h += '</tr>';
+                }
+                h += '</tbody></table>';
+                container.innerHTML = h;
+            }
+
+            const unassignedList = document.getElementById('unassignedSubjectsList');
+            let unassignedHTML = '';
+            let requiredItems = [];
+            let classesToProcess = className === "all_classes" ? schedule.columns : [className];
+            
+            classesToProcess.forEach(cName => {
+                schedule.teachers.forEach(teacher => {
+                    if (teacher.classes?.[cName]) {
+                        Object.entries(teacher.classes[cName]).forEach(([subject, periods]) => {
+                            for(let i=0; i<periods; i++) { requiredItems.push({ id: 't_'+teacher.id+'_'+cName+'_'+subject+'_'+i, subject: subject, teacher: teacher.name, className: cName }); }
+                        });
+                    }
+                });
+            });
+
+            const assignedItems = [];
+            classesToProcess.forEach(cName => {
+                if (schedule.timetables?.[cName]) {
+                    Object.values(schedule.timetables[cName]).forEach(dayObj => { Object.values(dayObj).forEach(item => assignedItems.push({...item, className: cName})); });
+                }
+            });
+
+            let remainingItems = [...requiredItems];
+            assignedItems.forEach(assigned => {
+                const index = remainingItems.findIndex(req => req.teacher === assigned.teacher && req.subject === assigned.subject && req.className === assigned.className);
+                if (index !== -1) remainingItems.splice(index, 1);
+            });
+            
+            if (remainingItems.length === 0) {
+                unassignedHTML = '<div class="text-center text-success mt-5"><i class="fas fa-check-circle fa-3x mb-2"></i><h6>هەمی وانە هاتنە دابەشكرن و جهێ وان دیار بوو!</h6></div>';
+            } else {
+                remainingItems.forEach(item => {
+                    unassignedHTML += '<div class="timetable-item mb-2 bg-white border border-primary rounded shadow-sm" style="cursor: grab;" data-subject="'+item.subject+'" data-teacher="'+item.teacher+'" data-id="'+item.id+'" data-class="'+item.className+'"><div class="d-flex justify-content-between align-items-center"><span class="fw-bold text-primary">'+item.subject+'</span><span class="badge bg-secondary">'+item.teacher+'</span></div><div class="text-muted small text-start">پولا '+item.className+'</div></div>';
+                });
+            }
+            unassignedList.innerHTML = unassignedHTML;
+            initSortables();
+        } 
+        else if (mode === 'teacher') {
+            const teacherName = document.getElementById('timetableTeacherSelect').value;
+            if (!teacherName) return;
+            
+            if (teacherName === "all_teachers") {
+                let finalHTML = '<div class="d-flex justify-content-center align-items-center mb-4 px-3"><h3 class="text-primary mb-0">خشتێ هەمی ماموستایان</h3>' +
+'</div><div>';
+                let hasAny = false;
+                schedule.teachers.forEach(t => {
+                    let hasClasses = schedule.columns.some(c => t.classes?.[c] && Object.values(t.classes[c]).some(v => v > 0));
+                    if (!hasClasses) return;
+                    hasAny = true;
+                    let periodHeaders = '<th style="width: 12%;">الروژ \\ حەسە</th>';
+                    for(let p=1; p<=periodsCount; p++) periodHeaders += '<th style="width: '+(88/periodsCount)+'%;">'+p+'</th>';
+                    
+                    let h = '<div class="mb-4"><h5 class="text-center mt-4 mb-2 text-secondary fw-bold">ماموستا: '+t.name+'</h5>' +
+                                '<table class="table table-bordered text-center align-middle" style="page-break-inside: avoid;">' +
+                                '<thead class="table-light"><tr>'+periodHeaders+'</tr></thead><tbody>';
+                    for (let d = 0; d < days.length; d++) {
+                        h += '<tr><td class="fw-bold bg-light align-middle">'+days[d]+'</td>';
+                        for (let p = 1; p <= periodsCount; p++) {
+                            let foundClass = '', foundSubject = '';
+                            for(const cName of schedule.columns) {
+                                const item = schedule.timetables?.[cName]?.[d]?.[p];
+                                if (item && item.teacher === t.name) { foundClass = cName; foundSubject = item.subject; break; }
+                            }
+                            h += '<td style="height: 60px;">' + (foundClass ? '<span class="fw-bold text-danger d-block">پولا '+foundClass+'</span><span class="text-muted small">'+foundSubject+'</span>' : '') + '</td>';
+                        }
+                        h += '</tr>';
+                    }
+                    h += '</tbody></table></div>';
+                    finalHTML += h;
+                });
+                if (!hasAny) finalHTML += '<div class="text-center p-4 text-muted">هیچ ماموستایەك وانە نینە!</div>';
+                finalHTML += '</div>';
+                container.innerHTML = finalHTML;
+                return;
+            }
+            
+            let periodHeaders = '<th style="width: 12%;">الروژ \\ حەسە</th>';
+            for(let p=1; p<=periodsCount; p++) periodHeaders += '<th style="width: '+(88/periodsCount)+'%;">'+p+'</th>';
+
+            let h = '<h4 class="text-center mb-3 text-primary" id="timetableGridTitle">خشتێ حەفتیانە یێ ماموستا: '+teacherName+'</h4>' +
+                        '<table class="table table-bordered text-center align-middle" id="timetableGridTable">' +
+                            '<thead class="table-light"><tr>'+periodHeaders+'</tr></thead><tbody>';
+            for (let d = 0; d < days.length; d++) {
+                h += '<tr><td class="fw-bold bg-light align-middle">'+days[d]+'</td>';
+                for (let p = 1; p <= periodsCount; p++) {
+                    let foundClass = '', foundSubject = '';
+                    for(const cName of schedule.columns) {
+                        const item = schedule.timetables?.[cName]?.[d]?.[p];
+                        if (item && item.teacher === teacherName) { foundClass = cName; foundSubject = item.subject; break; }
+                    }
+                    h += '<td style="height: 80px;">'+(foundClass ? '<span class="fw-bold text-danger d-block">پولا '+foundClass+'</span><span class="text-muted small">'+foundSubject+'</span>' : '')+'</td>';
+                }
+                h += '</tr>';
+            }
+            h += '</tbody></table>';
+            container.innerHTML = h;
+        }
+        else if (mode === 'master') {
+            let h = '<h4 class="text-center mb-3 text-danger">خشتێ گشتی یێ پولان (الماستر)</h4>';
+            h += '<table class="table table-bordered text-center align-middle bg-white" style="font-size: 0.75rem; min-width: '+(periodsCount * days.length * 40)+'px;">' +
+                        '<thead class="table-light">' +
+                            '<tr>' +
+                                '<th rowspan="2" class="align-middle bg-secondary text-white" style="width: 80px; position: sticky; right: 0; z-index: 2;">پول \\ حەسە</th>';
+            for(let d=0; d<days.length; d++) h += '<th colspan="'+periodsCount+'" class="border-start border-end border-dark bg-dark text-white">'+days[d]+'</th>';
+            h += '</tr><tr>';
+            for(let d=0; d<days.length; d++) {
+                for(let p=1; p<=periodsCount; p++) h += '<th class="'+(p===1?'border-start border-dark':'')+' '+(p===periodsCount?'border-end border-dark':'')+' bg-secondary text-white">'+p+'</th>';
+            }
+            h += '</tr></thead><tbody>';
+
+            schedule.columns.forEach(className => {
+                h += '<tr><td class="fw-bold bg-light text-nowrap" style="position: sticky; right: 0; z-index: 1;">'+className+'</td>';
+                for (let d = 0; d < days.length; d++) {
+                    for (let p = 1; p <= periodsCount; p++) {
+                        const item = schedule.timetables?.[className]?.[d]?.[p];
+                        const borderClass = (p===1 ? 'border-start border-dark ' : '') + (p===periodsCount ? 'border-end border-dark ' : '');
+                        h += '<td class="'+borderClass+'" style="overflow:hidden;">'+(item ? '<div class="fw-bold text-primary" style="line-height:1.1; overflow-wrap:anywhere; word-break:break-word; white-space:normal;">'+item.subject+'</div><div class="text-muted" style="font-size: 0.6rem; line-height:1.05; overflow-wrap:anywhere; word-break:break-word; white-space:normal;">'+item.teacher+'</div>' : '')+'</td>';
+                    }
+                }
+                h += '</tr>';
+            });
+            h += '</tbody></table>';
+            container.innerHTML = h;
+        }
+        else if (mode === 'master_teacher') {
+            const activeTeachers = schedule.teachers.filter(t => schedule.columns.reduce((s, c) => s + (t.classes?.[c] ? Object.values(t.classes[c]).reduce((a, b) => a + parseInt(b, 10), 0) : 0), 0) > 0);
+            let h = '<h4 class="text-center mb-3 text-warning">خشتێ گشتی یێ ماموستایان (ماستر المعلمين)</h4>';
+            h += '<table class="table table-bordered text-center align-middle bg-white" style="font-size: 0.75rem; min-width: '+(periodsCount * days.length * 45)+'px;">' +
+                        '<thead class="table-light">' +
+                            '<tr>' +
+                                '<th rowspan="2" class="align-middle bg-secondary text-white" style="width: 120px; position: sticky; right: 0; z-index: 2;">ماموستا \\ حەسە</th>';
+            for(let d=0; d<days.length; d++) h += '<th colspan="'+periodsCount+'" class="border-start border-end border-dark bg-dark text-white">'+days[d]+'</th>';
+            h += '</tr><tr>';
+            for(let d=0; d<days.length; d++) {
+                for(let p=1; p<=periodsCount; p++) h += '<th class="'+(p===1?'border-start border-dark':'')+' '+(p===periodsCount?'border-end border-dark':'')+' bg-secondary text-white">'+p+'</th>';
+            }
+            h += '</tr></thead><tbody>';
+
+            activeTeachers.forEach(teacher => {
+                h += '<tr><td class="fw-bold bg-light text-nowrap" style="position: sticky; right: 0; z-index: 1;">'+teacher.name+'</td>';
+                for (let d = 0; d < days.length; d++) {
+                    for (let p = 1; p <= periodsCount; p++) {
+                        let foundClass = '', foundSubject = '';
+                        for(const cName of schedule.columns) {
+                            const item = schedule.timetables?.[cName]?.[d]?.[p];
+                            if (item && item.teacher === teacher.name) { foundClass = cName; foundSubject = item.subject; break; }
+                        }
+                        const borderClass = (p===1 ? 'border-start border-dark ' : '') + (p===periodsCount ? 'border-end border-dark ' : '');
+                        h += '<td class="'+borderClass+'" style="overflow:hidden;">'+(foundClass ? '<div class="fw-bold text-danger" style="line-height:1.1; overflow-wrap:anywhere; word-break:break-word; white-space:normal;">'+foundClass+'</div><div class="text-muted" style="font-size: 0.6rem; line-height:1.05; overflow-wrap:anywhere; word-break:break-word; white-space:normal;">'+foundSubject+'</div>' : '')+'</td>';
+                    }
+                }
+                h += '</tr>';
+            });
+            h += '</tbody></table>';
+            container.innerHTML = h;
+        }
+    }
+
+    function initSortables() {
+        sortables.forEach(s => s.destroy());
+        sortables = [];
+
+        const commonOptions = {
+            group: 'timetable',
+            animation: 150,
+            ghostClass: 'bg-light',
+            onEnd: handleTimetableDrop
+        };
+
+        const unassignedList = document.getElementById('unassignedSubjectsList');
+        if (unassignedList) sortables.push(new Sortable(unassignedList, commonOptions));
+
+        const cells = document.querySelectorAll('.timetable-cell');
+        cells.forEach(cell => {
+            sortables.push(new Sortable(cell, { ...commonOptions }));
+        });
+    }
+
+
+
+
+    function handleTimetableDrop(evt) {
+        const itemEl = evt.item;
+        const toEl = evt.to;
+        const fromEl = evt.from;
+        const schedule = allSchedules[activeScheduleName];
+
+        const toDay = toEl.getAttribute('data-day');
+        const toPeriod = toEl.getAttribute('data-period');
+        const teacherName = itemEl.getAttribute('data-teacher');
+        
+        const targetClassName = toEl.getAttribute('data-class') || document.getElementById('timetableClassSelect').value;
+        const itemClassName = itemEl.getAttribute('data-class');
+
+        if (itemClassName && targetClassName && itemClassName !== targetClassName) {
+            showToast("نەشێی وانەیەکا پولەکێ ببەیە پولەکا دی!", "error");
+            fromEl.appendChild(itemEl);
+            return;
+        }
+
+        const className = targetClassName;
+
+        if (toDay && toPeriod) {
+            Array.from(toEl.children).forEach(child => {
+                if (child !== itemEl) {
+                    document.getElementById('unassignedSubjectsList').appendChild(child);
+                }
+            });
+
+            let hasConflict = false;
+            let conflictClass = '';
+            for (const cName in schedule.timetables) {
+                if (cName !== className && schedule.timetables[cName]?.[toDay]?.[toPeriod]) {
+                    if (schedule.timetables[cName][toDay][toPeriod].teacher === teacherName) {
+                        hasConflict = true;
+                        conflictClass = cName;
+                        break;
+                    }
+                }
+            }
+
+            if (hasConflict) {
+                Swal.fire('ماموستا یێ مژویلە!', 'ماموستا "'+teacherName+'" ل ڤی دەمی وانە ل پولا "'+conflictClass+'" هەیە. نابت دوو پولان د ئێك دەم دا بێژت.', 'error');
+                fromEl.appendChild(itemEl);
+                saveTimetableState(className);
+                return;
+            }
+        }
+        
+        if (!itemClassName) {
+            itemEl.setAttribute('data-class', className);
+        }
+        saveTimetableState(className);
+    }
+    function saveTimetableState(className) {
+        const schedule = allSchedules[activeScheduleName];
+        if (!schedule.timetables[className]) schedule.timetables[className] = {};
+        
+        for(let d in schedule.timetables[className]) {
+             for(let p in schedule.timetables[className][d]) {
+                 delete schedule.timetables[className][d][p];
+             }
+        }
+        
+        const cells = document.querySelectorAll('.timetable-cell[data-class="'+className+'"]');
+        if (cells.length === 0) {
+            // fallback for single view without data-class bound tightly
+            const fallbackCells = document.querySelectorAll('#timetableGridTable .timetable-cell');
+            fallbackCells.forEach(cell => {
+                const day = cell.getAttribute('data-day');
+                const period = cell.getAttribute('data-period');
+                const itemEl = cell.querySelector('.timetable-item');
+                if (itemEl) {
+                    if (!schedule.timetables[className][day]) schedule.timetables[className][day] = {};
+                    schedule.timetables[className][day][period] = {
+                        id: itemEl.getAttribute('data-id'),
+                        subject: itemEl.getAttribute('data-subject'),
+                        teacher: itemEl.getAttribute('data-teacher'),
+                        className: className
+                    };
+                }
+            });
+        } else {
+            cells.forEach(cell => {
+                const day = cell.getAttribute('data-day');
+                const period = cell.getAttribute('data-period');
+                const itemEl = cell.querySelector('.timetable-item');
+                
+                if (itemEl) {
+                    if (!schedule.timetables[className][day]) schedule.timetables[className][day] = {};
+                    schedule.timetables[className][day][period] = {
+                        id: itemEl.getAttribute('data-id'),
+                        subject: itemEl.getAttribute('data-subject'),
+                        teacher: itemEl.getAttribute('data-teacher'),
+                        className: className
+                    };
+                }
+            });
+        }
+        saveData();
+        renderTimetableGrid();
+    }
+    function clearClassTimetable() {
+        Swal.fire({
+            title: 'پشتراستی؟',
+            text: `تە دڤێت خشتەیێ هەمی پولان ڤالا بکەی؟ (مسح جميع الجداول)`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'بەڵی، هەمی ڤالا بکە',
+            cancelButtonText: 'هه‌لوه‌شاندن'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                allSchedules[activeScheduleName].timetables = {};
+                saveData();
+                renderTimetableGrid();
+                showToast('خشتەیێن هەمی پولان هاتنە ڤالاکرن');
+            }
+        });
+    }
+
+    function printCurrentTimetableView() {
+        const container = document.getElementById("timetableGridContainer");
+        if (!container) return;
+        const clone = container.cloneNode(true);
+        printWithContent(`رێزان ب چاپکرنێ`, `<div class="table-responsive">${clone.outerHTML}</div>`);
+    }
+
+    // --- Advanced Timetable Features (Auto-Distribute & Master Prints) ---
+    function autoDistributeTimetableLegacy() {
+        Swal.fire({
+            title: 'دابەشکرنا ئۆتۆماتیکی',
+            text: 'ئایا تە دڤێت سیستەم ب شێوەیەكێ ئۆتۆماتیکی هەمی وانەیێن بێ جهـ بۆ هەمی پولان دابەش بکەت؟ ڤێ چەندێ دبت دەمەکێ کێم پێدڤی بت.',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'بەڵی، دابەش بکە',
+            cancelButtonText: 'هه‌لوه‌شاندن'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const schedule = allSchedules[activeScheduleName];
+                const days = schedule.settings.workDays || ['ئێك شەمب', 'دوو شەمب', 'سێ شەمب', 'چوار شەمب', 'پێنج شەمب'];
+                const periodsCount = schedule.settings.periodsPerDay || 7;
+                
+                if (!schedule.timetables) schedule.timetables = {};
+                
+                let unassigned = [];
+                // 1. Gather all required items
+                schedule.columns.forEach(className => {
+                    if (!schedule.timetables[className]) schedule.timetables[className] = {};
+                    schedule.teachers.forEach(teacher => {
+                        if (teacher.classes?.[className]) {
+                            Object.entries(teacher.classes[className]).forEach(([subject, periods]) => {
+                                for(let i=0; i<periods; i++) {
+                                    unassigned.push({ className, id: `t_${teacher.id}_${subject}_${i}`, subject, teacher: teacher.name });
+                                }
+                            });
+                        }
+                    });
+                });
+
+                // 2. Filter out already assigned
+                unassigned = unassigned.filter(req => {
+                    for(let d=0; d<days.length; d++) {
+                        for(let p=1; p<=periodsCount; p++) {
+                            const item = schedule.timetables[req.className]?.[d]?.[p];
+                            if (item && item.teacher === req.teacher && item.subject === req.subject && !item._matched) {
+                                item._matched = true;
+                                return false; 
+                            }
+                        }
+                    }
+                    return true;
+                });
+                
+                // Cleanup temp flag
+                schedule.columns.forEach(className => {
+                    for(let d=0; d<days.length; d++) {
+                        for(let p=1; p<=periodsCount; p++) {
+                            if(schedule.timetables[className]?.[d]?.[p]) delete schedule.timetables[className][d][p]._matched;
+                        }
+                    }
+                });
+
+                // 3. Multi-Pass Greedy Placement
+                const MAX_ITERATIONS = 500; // Boosted to 500 iter for maximum conflict resolution
+                let bestDistribution = null;
+                let bestUnassignedCount = Infinity;
+                let bestPlacedCount = 0;
+
+                for (let iter = 0; iter < MAX_ITERATIONS; iter++) {
+                    // Clone the clean unassigned state
+                    let tempUnassigned = JSON.parse(JSON.stringify(unassigned));
+                    
+                    // Shuffle the tie-breaking rules
+                    tempUnassigned.sort((a, b) => {
+                        const weightA = parseInt(schedule.teachers.find(t=>t.name===a.teacher)?.classes[a.className]?.[a.subject] || 0);
+                        const weightB = parseInt(schedule.teachers.find(t=>t.name===b.teacher)?.classes[b.className]?.[b.subject] || 0);
+                        if (weightB === weightA) return Math.random() - 0.5; // Crucial: Randomness makes iterations useful
+                        return weightB - weightA;
+                    });
+                    
+                    // Clone the current timetables struct
+                    let tempTimetables = JSON.parse(JSON.stringify(schedule.timetables || {}));
+
+                    let currentPlacedCount = 0;
+                    tempUnassigned.forEach(item => {
+                        let placed = false;
+                        
+                        let totalTeacherPeriodsInClass = 0;
+                        let teacherObj = schedule.teachers.find(t => t.name === item.teacher);
+                        if (teacherObj && teacherObj.classes?.[item.className]) {
+                            Object.values(teacherObj.classes[item.className]).forEach(p => totalTeacherPeriodsInClass += parseInt(p, 10));
+                        }
+                        
+                        let availableDaysCount = days.length;
+                        if (teacherObj && teacherObj.offDays) {
+                            availableDaysCount -= teacherObj.offDays.filter(day => days.includes(day)).length;
+                        }
+                        if (availableDaysCount <= 0) availableDaysCount = 1;
+                        const maxTeacherPerDay = Math.ceil(totalTeacherPeriodsInClass / availableDaysCount);
+
+                        let currentMaxPerDay = maxTeacherPerDay;
+                        while (!placed && currentMaxPerDay <= periodsCount) {
+                            let teacherDailyLoad = Array(days.length).fill(0);
+                            for(let day=0; day<days.length; day++) {
+                                for(const cName of schedule.columns) {
+                                    for(let period=1; period<=periodsCount; period++) {
+                                        if (tempTimetables[cName]?.[day]?.[period]?.teacher === item.teacher) teacherDailyLoad[day]++;
+                                    }
+                                }
+                            }
+                            
+                            let preferredDays = [];
+                            for(let d=0; d<days.length; d++) preferredDays.push(d);
+                            preferredDays.sort((a, b) => {
+                                if (teacherDailyLoad[a] === teacherDailyLoad[b]) return Math.random() - 0.5;
+                                return teacherDailyLoad[a] - teacherDailyLoad[b];
+                            });
+
+                            for(let dayOrder=0; dayOrder<preferredDays.length && !placed; dayOrder++) {
+                                let d = preferredDays[dayOrder];
+                                let dayName = days[d];
+                                if (teacherObj && teacherObj.offDays && teacherObj.offDays.includes(dayName)) continue;
+
+                                let teacherSameDayCount = 0;
+                                for(let checkP=1; checkP<=periodsCount; checkP++) {
+                                    if(tempTimetables[item.className]?.[d]?.[checkP]?.teacher === item.teacher) teacherSameDayCount++;
+                                }
+                                if(teacherSameDayCount >= currentMaxPerDay) continue;
+
+                                let periodUsageCount = Array(periodsCount + 1).fill(0);
+                                for(let day=0; day<days.length; day++) {
+                                    for(let period=1; period<=periodsCount; period++) {
+                                        if (tempTimetables[item.className]?.[day]?.[period]?.teacher === item.teacher) {
+                                            periodUsageCount[period]++;
+                                        }
+                                    }
+                                }
+                                
+                                let preferredPeriods = [];
+                                for(let p=1; p<=periodsCount; p++) preferredPeriods.push(p);
+                                
+                                preferredPeriods.sort((a, b) => {
+                                    if (periodUsageCount[a] === periodUsageCount[b]) return Math.random() - 0.5;
+                                    return periodUsageCount[a] - periodUsageCount[b];
+                                });
+
+                                for(let i=0; i<preferredPeriods.length && !placed; i++) {
+                                    let p = preferredPeriods[i];
+                                    
+                                    if (teacherObj?.blockedPeriods?.[dayName] && teacherObj.blockedPeriods[dayName].includes(p)) continue;
+                                    
+                                    if (!tempTimetables[item.className][d]) tempTimetables[item.className][d] = {};
+                                    if (!tempTimetables[item.className][d][p]) {
+                                        let teacherFree = true;
+                                        for(const cName of schedule.columns) {
+                                            if (tempTimetables[cName]?.[d]?.[p]?.teacher === item.teacher) {
+                                                teacherFree = false;
+                                                break;
+                                            }
+                                        }
+                                        if (teacherFree) {
+                                            tempTimetables[item.className][d][p] = {
+                                                id: item.id, subject: item.subject, teacher: item.teacher
+                                            };
+                                            placed = true;
+                                            currentPlacedCount++;
+                                        }
+                                    }
+                                }
+                            }
+                            if (!placed) {
+                                currentMaxPerDay++; // Relax constraint and try again!
+                            }
+                        }
+                    });
+
+                    let currentUnassignedCount = tempUnassigned.length - currentPlacedCount;
+                    if (currentUnassignedCount < bestUnassignedCount) {
+                        bestUnassignedCount = currentUnassignedCount;
+                        bestPlacedCount = currentPlacedCount;
+                        bestDistribution = JSON.parse(JSON.stringify(tempTimetables));
+                        
+                        if (bestUnassignedCount === 0) break; // Solved perfectly!
+                    }
+                }
+
+                if (bestDistribution) {
+                    schedule.timetables = bestDistribution;
+                }
+
+                saveData();
+                renderTimetableGrid();
+                const remaining = bestUnassignedCount;
+                Swal.fire('تم التوزيع التلقائي', `هاتنە دابەشكرن ب سەركەفتیانە: ${bestPlacedCount} وانە.<br>${remaining > 0 ? `تێبینی: ${remaining} وانە نه‌هاتنە دابەشكرن ژبەر تێكچوونا دەمان (تعارض). پێدڤیە دەستكاریێ ب دەستی بكەی.` : 'هەمی وانە بێ كێشە جهـ گرتن!'}`, remaining > 0 ? 'warning' : 'success');
+            }
+        });
+    }
+
+    function ttBuildRequiredItems(schedule) {
+        const items = [];
+        schedule.columns.forEach(className => {
+            schedule.teachers.forEach(teacher => {
+                if (!teacher.classes?.[className]) return;
+                Object.entries(teacher.classes[className]).forEach(([subject, rawPeriods]) => {
+                    const periods = parseInt(rawPeriods, 10) || 0;
+                    for (let i = 0; i < periods; i++) {
+                        items.push({
+                            className,
+                            subject,
+                            teacher: teacher.name,
+                            id: `t_${teacher.id}_${className}_${subject}_${i}`
+                        });
+                    }
+                });
+            });
+        });
+        return items;
+    }
+
+    function ttCreateEmpty(columns) {
+        const timetables = {};
+        columns.forEach(className => { timetables[className] = {}; });
+        return timetables;
+    }
+
+    function ttReqKey(item) {
+        return `${item.className}|||${item.teacher}|||${item.subject}`;
+    }
+
+    function ttClassDayLoad(timetables, className, dayIndex) {
+        return Object.keys(timetables[className]?.[dayIndex] || {}).length;
+    }
+
+    function ttSubjectDayLoad(timetables, className, dayIndex, subject) {
+        return Object.values(timetables[className]?.[dayIndex] || {}).filter(item => item.subject === subject).length;
+    }
+
+    function ttTeacherDayLoad(timetables, columns, teacherName, dayIndex, periodsCount) {
+        let total = 0;
+        columns.forEach(className => {
+            for (let p = 1; p <= periodsCount; p++) {
+                if (timetables[className]?.[dayIndex]?.[p]?.teacher === teacherName) total++;
+            }
+        });
+        return total;
+    }
+
+    function ttTeacherPeriodUsage(timetables, columns, teacherName, period, daysCount) {
+        let total = 0;
+        columns.forEach(className => {
+            for (let d = 0; d < daysCount; d++) {
+                if (timetables[className]?.[d]?.[period]?.teacher === teacherName) total++;
+            }
+        });
+        return total;
+    }
+
+    function ttTeacherBusy(timetables, columns, teacherName, dayIndex, period, excludeClassName = null) {
+        return columns.some(className => {
+            if (excludeClassName && className === excludeClassName) return false;
+            return timetables[className]?.[dayIndex]?.[period]?.teacher === teacherName;
+        });
+    }
+
+    function ttTeacherCanTake(teacherObj, dayName, period) {
+        if (!teacherObj) return true;
+        if (teacherObj.offDays?.includes(dayName)) return false;
+        if (teacherObj.blockedPeriods?.[dayName]?.includes(period)) return false;
+        return true;
+    }
+
+    function ttPlaceItem(timetables, item, dayIndex, period) {
+        if (!timetables[item.className]) timetables[item.className] = {};
+        if (!timetables[item.className][dayIndex]) timetables[item.className][dayIndex] = {};
+        timetables[item.className][dayIndex][period] = {
+            id: item.id,
+            subject: item.subject,
+            teacher: item.teacher
+        };
+    }
+
+    function ttBuildMeta(schedule, days, periodsCount, requiredItems) {
+        const classLoad = {};
+        const teacherLoad = {};
+        const teacherAvailability = {};
+        const classDailyTarget = {};
+        const teacherDailyTarget = {};
+        const pairLoad = {};
+
+        requiredItems.forEach(item => {
+            classLoad[item.className] = (classLoad[item.className] || 0) + 1;
+            teacherLoad[item.teacher] = (teacherLoad[item.teacher] || 0) + 1;
+            pairLoad[ttReqKey(item)] = (pairLoad[ttReqKey(item)] || 0) + 1;
+        });
+
+        schedule.columns.forEach(className => {
+            classDailyTarget[className] = Math.ceil((classLoad[className] || 0) / Math.max(days.length, 1));
+        });
+
+        schedule.teachers.forEach(teacher => {
+            let available = 0;
+            days.forEach(dayName => {
+                if (teacher.offDays?.includes(dayName)) return;
+                for (let period = 1; period <= periodsCount; period++) {
+                    if (!teacher.blockedPeriods?.[dayName] || !teacher.blockedPeriods[dayName].includes(period)) {
+                        available++;
+                    }
+                }
+            });
+            teacherAvailability[teacher.name] = available;
+            const workingDays = Math.max(days.filter(dayName => !teacher.offDays?.includes(dayName)).length, 1);
+            teacherDailyTarget[teacher.name] = Math.ceil((teacherLoad[teacher.name] || 0) / workingDays);
+        });
+
+        return { classLoad, teacherLoad, teacherAvailability, classDailyTarget, teacherDailyTarget, pairLoad };
+    }
+
+    function ttCandidateSlots(schedule, timetables, item, days, periodsCount, meta, blockedSlotKey = null) {
+        const teacherObj = schedule.teachers.find(t => t.name === item.teacher);
+        const slots = [];
+
+        for (let d = 0; d < days.length; d++) {
+            const dayName = days[d];
+            for (let p = 1; p <= periodsCount; p++) {
+                const slotKey = `${item.className}|${d}|${p}`;
+                if (blockedSlotKey && slotKey === blockedSlotKey) continue;
+                if (!ttTeacherCanTake(teacherObj, dayName, p)) continue;
+                if (timetables[item.className]?.[d]?.[p]) continue;
+                if (ttTeacherBusy(timetables, schedule.columns, item.teacher, d, p)) continue;
+
+                const classDayLoad = ttClassDayLoad(timetables, item.className, d);
+                const subjectDayLoad = ttSubjectDayLoad(timetables, item.className, d, item.subject);
+                const teacherDayLoad = ttTeacherDayLoad(timetables, schedule.columns, item.teacher, d, periodsCount);
+                const teacherPeriodUsage = ttTeacherPeriodUsage(timetables, schedule.columns, item.teacher, p, days.length);
+
+                const classTargetPenalty = classDayLoad >= (meta.classDailyTarget[item.className] || periodsCount) ? 4 : 0;
+                const teacherTargetPenalty = teacherDayLoad >= (meta.teacherDailyTarget[item.teacher] || periodsCount) ? 5 : 0;
+
+                const score =
+                    (classDayLoad * 6) +
+                    (subjectDayLoad * 10) +
+                    (teacherDayLoad * 8) +
+                    (teacherPeriodUsage * 3) +
+                    (classTargetPenalty * 5) +
+                    (teacherTargetPenalty * 6) +
+                    Math.random();
+
+                slots.push({ dayIndex: d, period: p, score });
+            }
+        }
+
+        slots.sort((a, b) => a.score - b.score);
+        return slots;
+    }
+
+    function ttTryPlaceWithSwap(schedule, timetables, item, days, periodsCount, meta) {
+        const directSlots = ttCandidateSlots(schedule, timetables, item, days, periodsCount, meta);
+        if (directSlots.length > 0) {
+            ttPlaceItem(timetables, item, directSlots[0].dayIndex, directSlots[0].period);
+            return true;
+        }
+
+        const teacherObj = schedule.teachers.find(t => t.name === item.teacher);
+        for (let d = 0; d < days.length; d++) {
+            const dayName = days[d];
+            for (let p = 1; p <= periodsCount; p++) {
+                const occupied = timetables[item.className]?.[d]?.[p];
+                if (!occupied) continue;
+                if (!ttTeacherCanTake(teacherObj, dayName, p)) continue;
+                if (ttTeacherBusy(timetables, schedule.columns, item.teacher, d, p, item.className)) continue;
+
+                const displacedItem = {
+                    className: item.className,
+                    subject: occupied.subject,
+                    teacher: occupied.teacher,
+                    id: occupied.id
+                };
+
+                delete timetables[item.className][d][p];
+                const relocationSlots = ttCandidateSlots(
+                    schedule,
+                    timetables,
+                    displacedItem,
+                    days,
+                    periodsCount,
+                    meta,
+                    `${item.className}|${d}|${p}`
+                );
+
+                if (relocationSlots.length > 0) {
+                    ttPlaceItem(timetables, displacedItem, relocationSlots[0].dayIndex, relocationSlots[0].period);
+                    ttPlaceItem(timetables, item, d, p);
+                    return true;
+                }
+
+                timetables[item.className][d][p] = occupied;
+            }
+        }
+
+        return false;
+    }
+
+    function ttSanitizeSeed(schedule, seedTimetables, requiredItems, days, periodsCount) {
+        const cleaned = ttCreateEmpty(schedule.columns);
+        const requiredCounts = {};
+        const usedCounts = {};
+
+        requiredItems.forEach(item => {
+            requiredCounts[ttReqKey(item)] = (requiredCounts[ttReqKey(item)] || 0) + 1;
+        });
+
+        schedule.columns.forEach(className => {
+            for (let d = 0; d < days.length; d++) {
+                for (let p = 1; p <= periodsCount; p++) {
+                    const currentItem = seedTimetables?.[className]?.[d]?.[p];
+                    if (!currentItem) continue;
+
+                    const candidate = {
+                        className,
+                        subject: currentItem.subject,
+                        teacher: currentItem.teacher,
+                        id: currentItem.id || `seed_${className}_${d}_${p}`
+                    };
+                    const key = ttReqKey(candidate);
+                    const teacherObj = schedule.teachers.find(t => t.name === candidate.teacher);
+
+                    if (!requiredCounts[key]) continue;
+                    if ((usedCounts[key] || 0) >= requiredCounts[key]) continue;
+                    if (!ttTeacherCanTake(teacherObj, days[d], p)) continue;
+                    if (ttTeacherBusy(cleaned, schedule.columns, candidate.teacher, d, p)) continue;
+
+                    ttPlaceItem(cleaned, candidate, d, p);
+                    usedCounts[key] = (usedCounts[key] || 0) + 1;
+                }
+            }
+        });
+
+        const consumed = {};
+        const remainingItems = requiredItems.filter(item => {
+            const key = ttReqKey(item);
+            const consumedCount = consumed[key] || 0;
+            if (consumedCount < (usedCounts[key] || 0)) {
+                consumed[key] = consumedCount + 1;
+                return false;
+            }
+            return true;
+        });
+
+        return { timetables: cleaned, remainingItems };
+    }
+
+    function ttRunAttempt(schedule, baseTimetables, itemsToPlace, days, periodsCount, meta, iterations) {
+        let bestTimetables = JSON.parse(JSON.stringify(baseTimetables));
+        let bestRemainingCount = itemsToPlace.length;
+
+        for (let iter = 0; iter < iterations; iter++) {
+            const tempTimetables = JSON.parse(JSON.stringify(baseTimetables));
+            const orderedItems = [...itemsToPlace].sort((a, b) => {
+                const availabilityDiff = (meta.teacherAvailability[a.teacher] || 0) - (meta.teacherAvailability[b.teacher] || 0);
+                if (availabilityDiff !== 0) return availabilityDiff;
+
+                const classDiff = (meta.classLoad[b.className] || 0) - (meta.classLoad[a.className] || 0);
+                if (classDiff !== 0) return classDiff;
+
+                const pairDiff = (meta.pairLoad[ttReqKey(b)] || 0) - (meta.pairLoad[ttReqKey(a)] || 0);
+                if (pairDiff !== 0) return pairDiff;
+
+                return Math.random() - 0.5;
+            });
+
+            let placedCount = 0;
+            orderedItems.forEach(item => {
+                if (ttTryPlaceWithSwap(schedule, tempTimetables, item, days, periodsCount, meta)) {
+                    placedCount++;
+                }
+            });
+
+            const remainingCount = itemsToPlace.length - placedCount;
+            if (remainingCount < bestRemainingCount) {
+                bestRemainingCount = remainingCount;
+                bestTimetables = JSON.parse(JSON.stringify(tempTimetables));
+                if (bestRemainingCount === 0) break;
+            }
+        }
+
+        return {
+            timetables: bestTimetables,
+            remainingCount: bestRemainingCount
+        };
+    }
+
+    function autoDistributeTimetable() {
+        Swal.fire({
+            title: 'دابەشکرنا ئۆتۆماتیکی',
+            text: 'ئایا تە دڤێت سیستەم ب شێوەیەکی ئۆتۆماتیکی هەمی وانەیێن بێ جهـ بۆ هەمی پولان دابەش بکەت؟ پێچەندێ دبت دەمەکێ کێم پێدڤی ببت.',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'بەلێ، دابەش بکە',
+            cancelButtonText: 'هەڵوەشاندن'
+        }).then((result) => {
+            if (!result.isConfirmed) return;
+
+            const schedule = allSchedules[activeScheduleName];
+            const days = schedule.settings.workDays || ['ئێك شەمب', 'دوو شەمب', 'سێ شەمب', 'چوار شەمب', 'پێنج شەمب'];
+            const periodsCount = schedule.settings.periodsPerDay || 7;
+
+            if (!schedule.timetables) schedule.timetables = {};
+
+            const requiredItems = ttBuildRequiredItems(schedule);
+            if (requiredItems.length === 0) {
+                Swal.fire('هەبوونی وانە نیە', 'هیچ حصەیەک بۆ دابەشکردن نیە.', 'info');
+                return;
+            }
+
+            const meta = ttBuildMeta(schedule, days, periodsCount, requiredItems);
+            const classCapacity = days.length * periodsCount;
+            const warnings = [];
+
+            schedule.columns.forEach(className => {
+                const requiredCount = meta.classLoad[className] || 0;
+                if (requiredCount > classCapacity) {
+                    warnings.push(`پولا ${className}: داواکاری ${requiredCount} حصەیە، بەڵام تەنها ${classCapacity} شوێن هەیە.`);
+                }
+            });
+
+            schedule.teachers.forEach(teacher => {
+                const requiredCount = meta.teacherLoad[teacher.name] || 0;
+                const availableCount = meta.teacherAvailability[teacher.name] || 0;
+                if (requiredCount > availableCount) {
+                    warnings.push(`ماموستا ${teacher.name}: ${requiredCount} حصەی هەیە، بەڵام تەنها ${availableCount} کاتە بەردەستە.`);
+                }
+            });
+
+            const sanitizedSeed = ttSanitizeSeed(schedule, schedule.timetables || {}, requiredItems, days, periodsCount);
+            const preservedPlacedCount = requiredItems.length - sanitizedSeed.remainingItems.length;
+
+            const preserveAttempt = ttRunAttempt(
+                schedule,
+                sanitizedSeed.timetables,
+                sanitizedSeed.remainingItems,
+                days,
+                periodsCount,
+                meta,
+                180
+            );
+
+            const rebuildAttempt = ttRunAttempt(
+                schedule,
+                ttCreateEmpty(schedule.columns),
+                requiredItems,
+                days,
+                periodsCount,
+                meta,
+                320
+            );
+
+            const preserveRemaining = preserveAttempt.remainingCount;
+            const rebuildRemaining = rebuildAttempt.remainingCount;
+
+            const useRebuild = rebuildRemaining < preserveRemaining;
+            const chosenTimetables = useRebuild ? rebuildAttempt.timetables : preserveAttempt.timetables;
+            const remaining = useRebuild ? rebuildRemaining : preserveRemaining;
+            const placedCount = requiredItems.length - remaining;
+
+            schedule.timetables = chosenTimetables;
+            saveData();
+            renderTimetableGrid();
+
+            let message = `هاتنە دابەشکرن: ${placedCount} حصە.<br>`;
+            if (!useRebuild && preservedPlacedCount > 0) {
+                message += `شوێنێن دروست یێن پێشوو پاراستن هاتن و دابەشکرن ل سەر وان بڵاڤ بوو.<br>`;
+            }
+            if (useRebuild) {
+                message += `بۆ ئەنجامێکی باشتر، خشتەکە ژ نووە هاتە دروستکرن.<br>`;
+            }
+
+            if (remaining > 0) {
+                message += `ماوە: ${remaining} حصەی نەهاتنە دابەشکرن.<br>`;
+            } else {
+                message += `هەمی حصە هاتنە دابەشکرن.<br>`;
+            }
+
+            if (warnings.length > 0) {
+                message += `<hr><div class="text-start"><strong>هۆکارێن گومان لێکراو:</strong><ul>${warnings.slice(0, 6).map(item => `<li>${item}</li>`).join('')}</ul></div>`;
+            }
+
+            Swal.fire('ئەنجام', message, remaining > 0 ? 'warning' : 'success');
+        });
+    }
+
+    function promptPrintOptions(mode) {
+        Swal.fire({
+            title: 'چەند خشتە د لاپەرەیەكێ دا؟',
+            text: 'كم جدول تود طباعته في ورقة واحدة؟',
+            input: 'select',
+            inputOptions: {
+                '1': '1 جدول في الورقة (حجم كبير)',
+                '2': '2 جداول في الورقة (حجم متوسط)',
+                '3': '3 جداول في الورقة (حجم صغير)',
+                '4': '4 جداول في الورقة (2x2 حجم صغير)'
+            },
+            inputValue: '1',
+            showCancelButton: true,
+            confirmButtonText: 'چاپکرن',
+            cancelButtonText: 'هەڵوەشاندن'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const perPage = parseInt(result.value);
+                if (mode === 'class') printClassTimetables(perPage);
+                else if (mode === 'teacher') printTeacherTimetables(perPage);
+            }
+        });
+    }
+
+    function promptMasterPrintOptions(mode) {
+        Swal.fire({
+            title: 'شێوازی چاپکرن',
+            text: 'بۆ خشتێ گشتی، ئاراستەی لاپەڕێ هەلبژێرە.',
+            input: 'select',
+            inputOptions: {
+                'landscape': 'ئاسۆیی (أفقي)',
+                'portrait': 'ستوونی (عامودي)'
+            },
+            inputValue: 'landscape',
+            showCancelButton: true,
+            confirmButtonText: 'چاپکرن',
+            cancelButtonText: 'هەڵوەشاندن'
+        }).then((result) => {
+            if (!result.isConfirmed) return;
+            if (mode === 'class') printMasterTimetable(result.value);
+            if (mode === 'teacher') printMasterTeacherTimetable(result.value);
+        });
+    }
+
+    function promptMasterHtmlDownload(mode) {
+        Swal.fire({
+            title: 'شێوازی هەڵگرتنا HTML',
+            text: 'بۆ خشتێ گشتی، ئاراستەی لاپەڕێ هەلبژێرە.',
+            input: 'select',
+            inputOptions: {
+                'landscape': 'ئاسۆیی (أفقي)',
+                'portrait': 'ستوونی (عامودي)'
+            },
+            inputValue: 'landscape',
+            showCancelButton: true,
+            confirmButtonText: 'هەڵگرتن',
+            cancelButtonText: 'هەڵوەشاندن'
+        }).then((result) => {
+            if (!result.isConfirmed) return;
+            if (mode === 'class') downloadMasterTimetableHTML(result.value);
+            if (mode === 'teacher') downloadMasterTeacherTimetableHTML(result.value);
+        });
+    }
+
+    function downloadCurrentDistributionHTML() {
+        const html = getCurrentDistributionHTML();
+        if (!html) { showToast('هیچ خشتەیەك نیە بۆ هەڵگرتن.', 'error'); return; }
+        downloadHTMLFile(`distribution_${activeScheduleName}`, html, { filename: `distribution_${sanitizeDownloadFileName(activeScheduleName)}.html` });
+    }
+
+    function downloadComprehensiveDistributionHTML() {
+        const html = getComprehensiveDistributionHTML();
+        if (!html) { showToast('هیچ ماموستایەك نیە بۆ هەڵگرتن.', 'error'); return; }
+        downloadHTMLFile(`teachers_report_${activeScheduleName}`, html, { filename: `teachers_report_${sanitizeDownloadFileName(activeScheduleName)}.html` });
+    }
+
+    function downloadSimpleDistributionHTML() {
+        const html = getSimpleDistributionHTML();
+        if (!html) { showToast('هیچ ماموستایەك نیە بۆ هەڵگرتن.', 'error'); return; }
+        downloadHTMLFile(`simple_distribution_${activeScheduleName}`, html, { filename: `simple_distribution_${sanitizeDownloadFileName(activeScheduleName)}.html` });
+    }
+
+    function downloadCurrentTimetableHTML() {
+        const container = document.getElementById("timetableGridContainer");
+        if (!container || !container.innerHTML.trim()) { showToast('هیچ خشتەیەك نیە بۆ هەڵگرتن.', 'error'); return; }
+        const clone = container.cloneNode(true);
+        clone.querySelectorAll(".no-print").forEach(el => el.remove());
+        clone.querySelectorAll("input, button, select").forEach(el => el.remove());
+        downloadHTMLFile(`timetable_${activeScheduleName}`, `<div class="table-responsive">${clone.innerHTML}</div>`, { filename: `timetable_${sanitizeDownloadFileName(activeScheduleName)}.html` });
+    }
+
+    function printClassTimetables(perPage = 1) {
+        const schedule = allSchedules[activeScheduleName];
+        let html = '';
+        const days = schedule.settings.workDays || ['ئێك شەمب', 'دوو شەمب', 'سێ شەمب', 'چوار شەمب', 'پێنج شەمب'];
+        const periodsCount = schedule.settings.periodsPerDay || 7;
+        
+        let periodHeaders = '';
+        for(let p=1; p<=periodsCount; p++) periodHeaders += `<th style="width: ${100/periodsCount}%;">${p}</th>`;
+
+        let containerStyle = '';
+        let itemStyle = 'margin-bottom: 20px; page-break-inside: avoid; width: 100%;';
+        if (perPage === 4) {
+            containerStyle = 'display: flex; flex-wrap: wrap; justify-content: space-between;';
+            itemStyle = 'width: 48%; margin-bottom: 20px; font-size: 8pt; page-break-inside: avoid; overflow: hidden; height: auto;';
+        } else if (perPage === 3) {
+             itemStyle = 'width: 100%; margin-bottom: 15px; font-size: 8pt; page-break-inside: avoid; height: auto;';
+        } else if (perPage === 2) {
+             itemStyle = 'width: 100%; margin-bottom: 30px; font-size: 10pt; page-break-inside: avoid; height: auto;';
+        }
+
+        const chunks = [];
+        for (let i = 0; i < schedule.columns.length; i += perPage) {
+            chunks.push(schedule.columns.slice(i, i + perPage));
+        }
+
+        chunks.forEach(chunk => {
+            html += `<div style="page-break-after: always; padding: 10px; ${containerStyle}">`;
+            chunk.forEach(className => {
+                html += `<div style="${itemStyle}">`;
+                html += `<h2 class="text-center mb-2 border-bottom pb-1" style="font-size: ${perPage >= 3 ? '12pt' : '18pt'};">خشتێ حەفتیانە یێ پولا: ${className}</h2>`;
+                html += `<table class="table table-bordered text-center align-middle shadow-sm" style="table-layout: fixed; width: 100%;">
+                    <thead class="table-light"><tr><th style="width:15%;">الروژ \\ حەسە</th>${periodHeaders}</tr></thead><tbody>`;
+                for (let d = 0; d < days.length; d++) {
+                    html += `<tr><td class="fw-bold bg-light" style="padding: 2px;">${days[d]}</td>`;
+                    for (let p = 1; p <= periodsCount; p++) {
+                        const item = schedule.timetables?.[className]?.[d]?.[p];
+                        const tdStyle = perPage >= 3 ? 'padding: 1px; height: 35px;' : 'height: 60px;';
+                        html += `<td style="${tdStyle}">${item ? `<div class="fw-bold text-primary">${item.subject}</div><div class="text-muted small">${item.teacher}</div>` : ''}</td>`;
+                    }
+                    html += `</tr>`;
+                }
+                html += `</tbody></table></div>`;
+            });
+            html += `</div>`;
+        });
+        printWithContent('خشتەیێن هەمی پولان', html);
+    }
+
+    function printTeacherTimetables(perPage = 1) {
+        const schedule = allSchedules[activeScheduleName];
+        let html = '';
+        const days = schedule.settings.workDays || ['ئێك شەمب', 'دوو شەمب', 'سێ شەمب', 'چوار شەمب', 'پێنج شەمب'];
+        const periodsCount = schedule.settings.periodsPerDay || 7;
+        
+        let periodHeaders = '';
+        for(let p=1; p<=periodsCount; p++) periodHeaders += `<th style="width: ${100/periodsCount}%;">${p}</th>`;
+
+        let containerStyle = '';
+        let itemStyle = 'margin-bottom: 20px; page-break-inside: avoid; width: 100%;';
+        if (perPage === 4) {
+            containerStyle = 'display: flex; flex-wrap: wrap; justify-content: space-between;';
+            itemStyle = 'width: 48%; margin-bottom: 20px; font-size: 8pt; page-break-inside: avoid; overflow: hidden; height: auto;';
+        } else if (perPage === 3) {
+             itemStyle = 'width: 100%; margin-bottom: 15px; font-size: 8pt; page-break-inside: avoid; height: auto;';
+        } else if (perPage === 2) {
+             itemStyle = 'width: 100%; margin-bottom: 30px; font-size: 10pt; page-break-inside: avoid; height: auto;';
+        }
+
+        const validTeachers = schedule.teachers.filter(teacher => {
+            const workload = schedule.columns.reduce((s, c) => s + (teacher.classes?.[c] ? Object.values(teacher.classes[c]).reduce((a, b) => a + parseInt(b, 10), 0) : 0), 0);
+            return workload > 0;
+        });
+
+        if (validTeachers.length === 0) { showToast('هیچ ماموستایەك نینە خشتە هەبت', 'error'); return; }
+
+        const chunks = [];
+        for (let i = 0; i < validTeachers.length; i += perPage) {
+            chunks.push(validTeachers.slice(i, i + perPage));
+        }
+
+        chunks.forEach(chunk => {
+            html += `<div style="page-break-after: always; padding: 10px; ${containerStyle}">`;
+            chunk.forEach(teacher => {
+                html += `<div style="${itemStyle}">`;
+                html += `<h2 class="text-center mb-2 border-bottom pb-1" style="font-size: ${perPage >= 3 ? '12pt' : '18pt'};">خشتێ حەفتیانە یێ ماموستا: ${teacher.name}</h2>`;
+                html += `<table class="table table-bordered text-center align-middle shadow-sm" style="table-layout: fixed; width: 100%;">
+                    <thead class="table-light"><tr><th style="width:15%;">الروژ \\ حەسە</th>${periodHeaders}</tr></thead><tbody>`;
+                for (let d = 0; d < days.length; d++) {
+                    const isOffDay = teacher.offDays && teacher.offDays.includes(days[d]);
+                    html += `<tr><td class="fw-bold bg-light" style="padding: 2px;">${days[d]}</td>`;
+                    
+                    if (isOffDay) {
+                        html += `<td colspan="${periodsCount}" class="bg-secondary text-white fw-bold align-middle" style="letter-spacing: 2px;">بهێنڤەدان (يوم إجازة للمعلم)</td></tr>`;
+                        continue;
+                    }
+
+                    for (let p = 1; p <= periodsCount; p++) {
+                        let foundClass = '', foundSubject = '';
+                        for(const cName of schedule.columns) {
+                            const item = schedule.timetables?.[cName]?.[d]?.[p];
+                            if (item && item.teacher === teacher.name) {
+                                foundClass = cName;
+                                foundSubject = item.subject;
+                                break;
+                            }
+                        }
+                        const tdStyle = perPage >= 3 ? 'padding: 1px; height: 35px;' : 'height: 60px;';
+                        html += `<td style="${tdStyle}">${foundClass ? `<div class="fw-bold text-danger">پولا ${foundClass}</div><div class="text-muted small">${foundSubject}</div>` : ''}</td>`;
+                    }
+                    html += `</tr>`;
+                }
+                html += `</tbody></table></div>`;
+            });
+            html += `</div>`;
+        });
+        printWithContent('خشتەیێن ماموستایان', html);
+    }
+
+    function downloadMasterTimetableHTML(pageOrientation = 'landscape') {
+        const schedule = allSchedules[activeScheduleName];
+        let html = '';
+        const days = schedule.settings.workDays || ['ئێك شەمب', 'دوو شەمب', 'سێ شەمب', 'چوار شەمب', 'پێنج شەمب'];
+        const periodsCount = schedule.settings.periodsPerDay || 7;
+        
+        html += `<h1 class="text-center mb-4">خشتێ گشتی یێ قوتابخانێ (الماستر)</h1>`;
+        html += `<div class="table-responsive"><table class="table table-bordered text-center align-middle" style="font-size: 7pt; width: 100%; table-layout: fixed;">
+                    <thead class="table-light">
+                        <tr>
+                            <th rowspan="2" class="align-middle bg-secondary text-white" style="width: 50px; border: 2px solid #000 !important;">پول</th>`;
+        for(let d=0; d<days.length; d++) html += `<th colspan="${periodsCount}" class="border-start border-end border-dark" style="border: 2px solid #000 !important; background: #fff !important; color: #000 !important; font-weight: bold;">${days[d]}</th>`;
+        html += `</tr><tr>`;
+        for(let d=0; d<days.length; d++) {
+            for(let p=1; p<=periodsCount; p++) html += `<th class="${p===1?'border-start border-dark':''} ${p===periodsCount?'border-end border-dark':''}" style="padding: 1px; border: 1.5px solid #000 !important; background: #fff !important; color: #000 !important; font-weight: bold;">${p}</th>`;
+        }
+        html += `</tr></thead><tbody>`;
+
+        schedule.columns.forEach(className => {
+            html += `<tr><td class="fw-bold bg-light">${className}</td>`;
+            for (let d = 0; d < days.length; d++) {
+                for (let p = 1; p <= periodsCount; p++) {
+                    const item = schedule.timetables?.[className]?.[d]?.[p];
+                    const borderClass = (p===1 ? 'border-start border-dark ' : '') + (p===periodsCount ? 'border-end border-dark ' : '');
+                    html += `<td class="${borderClass}" style="padding: 1px; overflow:hidden;">${item ? `<div class="fw-bold text-primary" style="line-height:1.1; overflow-wrap:anywhere; word-break:break-word; white-space:normal;">${item.subject}</div><div class="text-muted" style="font-size: 5.5pt; line-height:1.05; overflow-wrap:anywhere; word-break:break-word; white-space:normal;">${item.teacher}</div>` : ''}</td>`;
+                }
+            }
+            html += `</tr>`;
+        });
+        html += `</tbody></table></div>`;
+        downloadHTMLFile(`master_classes_${activeScheduleName}`, html, { orientation: pageOrientation, filename: `master_classes_${sanitizeDownloadFileName(activeScheduleName)}_${pageOrientation}.html` });
+    }
+
+    function printMasterTimetable(pageOrientation = 'landscape') {
+        const schedule = allSchedules[activeScheduleName];
+        let html = '';
+        const days = schedule.settings.workDays || ['ئێك شەمب', 'دوو شەمب', 'سێ شەمب', 'چوار شەمب', 'پێنج شەمب'];
+        const periodsCount = schedule.settings.periodsPerDay || 7;
+        
+        html += `<h1 class="text-center mb-4">خشتێ گشتی یێ قوتابخانێ (الماستر)</h1>`;
+        html += `<div class="table-responsive"><table class="table table-bordered text-center align-middle" style="font-size: 7pt; width: 100%; table-layout: fixed;">
+                    <thead class="table-light">
+                        <tr>
+                            <th rowspan="2" class="align-middle bg-secondary text-white" style="width: 50px; border: 2px solid #000 !important;">پول</th>`;
+        for(let d=0; d<days.length; d++) html += `<th colspan="${periodsCount}" class="border-start border-end border-dark" style="border: 2px solid #000 !important; background: #fff !important; color: #000 !important; font-weight: bold;">${days[d]}</th>`;
+        html += `</tr><tr>`;
+        for(let d=0; d<days.length; d++) {
+            for(let p=1; p<=periodsCount; p++) html += `<th class="${p===1?'border-start border-dark':''} ${p===periodsCount?'border-end border-dark':''}" style="padding: 1px; border: 1.5px solid #000 !important; background: #fff !important; color: #000 !important; font-weight: bold;">${p}</th>`;
+        }
+        html += `</tr></thead><tbody>`;
+
+        schedule.columns.forEach(className => {
+            html += `<tr><td class="fw-bold bg-light">${className}</td>`;
+            for (let d = 0; d < days.length; d++) {
+                for (let p = 1; p <= periodsCount; p++) {
+                    const item = schedule.timetables?.[className]?.[d]?.[p];
+                    const borderClass = (p===1 ? 'border-start border-dark ' : '') + (p===periodsCount ? 'border-end border-dark ' : '');
+                    html += `<td class="${borderClass}" style="padding: 1px; overflow:hidden;">${item ? `<div class="fw-bold text-primary" style="line-height:1.1; overflow-wrap:anywhere; word-break:break-word; white-space:normal;">${item.subject}</div><div class="text-muted" style="font-size: 5.5pt; line-height:1.05; overflow-wrap:anywhere; word-break:break-word; white-space:normal;">${item.teacher}</div>` : ''}</td>`;
+                }
+            }
+            html += `</tr>`;
+        });
+        html += `</tbody></table></div>`;
+        
+        printWithContent('خشتێ گشتی (الماستر)', html, { orientation: pageOrientation });
+    }
+
+    function downloadMasterTeacherTimetableHTML(pageOrientation = 'landscape') {
+        const schedule = allSchedules[activeScheduleName];
+        let html = '';
+        const days = schedule.settings.workDays || ['ئێك شەمب', 'دوو شەمب', 'سێ شەمب', 'چوار شەمب', 'پێنج شەمب'];
+        const periodsCount = schedule.settings.periodsPerDay || 7;
+        
+        const activeTeachers = schedule.teachers.filter(t => {
+            return schedule.columns.reduce((s, c) => s + (t.classes?.[c] ? Object.values(t.classes[c]).reduce((a, b) => a + parseInt(b, 10), 0) : 0), 0) > 0;
+        });
+
+        if(activeTeachers.length === 0) { showToast('هیچ ماموستایەك نینە خشتە هەبت', 'error'); return; }
+
+        html += `<h1 class="text-center mb-4">خشتێ گشتی یێ ماموستایان (الماستر للمعلمين)</h1>`;
+        html += `<div class="table-responsive"><table class="table table-bordered text-center align-middle" style="font-size: 7pt; width: 100%; table-layout: fixed;">
+                    <thead class="table-light">
+                        <tr>
+                            <th rowspan="2" class="align-middle bg-secondary text-white" style="width: 70px; border: 2px solid #000 !important;">ماموستا</th>`;
+        for(let d=0; d<days.length; d++) html += `<th colspan="${periodsCount}" class="border-start border-end border-dark" style="border: 2px solid #000 !important; background: #fff !important; color: #000 !important; font-weight: bold;">${days[d]}</th>`;
+        html += `</tr><tr>`;
+        for(let d=0; d<days.length; d++) {
+            for(let p=1; p<=periodsCount; p++) html += `<th class="${p===1?'border-start border-dark':''} ${p===periodsCount?'border-end border-dark':''}" style="padding: 1px; border: 1.5px solid #000 !important; background: #fff !important; color: #000 !important; font-weight: bold;">${p}</th>`;
+        }
+        html += `</tr></thead><tbody>`;
+
+        activeTeachers.forEach(teacher => {
+            html += `<tr><td class="fw-bold bg-light text-nowrap">${teacher.name}</td>`;
+            for (let d = 0; d < days.length; d++) {
+                for (let p = 1; p <= periodsCount; p++) {
+                    let foundClass = '', foundSubject = '';
+                    for(const cName of schedule.columns) {
+                        const item = schedule.timetables?.[cName]?.[d]?.[p];
+                        if (item && item.teacher === teacher.name) {
+                            foundClass = cName;
+                            foundSubject = item.subject;
+                            break;
+                        }
+                    }
+                    const borderClass = (p===1 ? 'border-start border-dark ' : '') + (p===periodsCount ? 'border-end border-dark ' : '');
+                    html += `<td class="${borderClass}" style="padding: 1px; overflow:hidden;">${foundClass ? `<div class="fw-bold text-danger" style="line-height:1.1; overflow-wrap:anywhere; word-break:break-word; white-space:normal;">${foundClass}</div><div class="text-muted" style="font-size: 5.5pt; line-height:1.05; overflow-wrap:anywhere; word-break:break-word; white-space:normal;">${foundSubject}</div>` : ''}</td>`;
+                }
+            }
+            html += `</tr>`;
+        });
+        html += `</tbody></table></div>`;
+        downloadHTMLFile(`master_teachers_${activeScheduleName}`, html, { orientation: pageOrientation, filename: `master_teachers_${sanitizeDownloadFileName(activeScheduleName)}_${pageOrientation}.html` });
+    }
+
+    function printMasterTeacherTimetable(pageOrientation = 'landscape') {
+        const schedule = allSchedules[activeScheduleName];
+        let html = '';
+        const days = schedule.settings.workDays || ['ئێك شەمب', 'دوو شەمب', 'سێ شەمب', 'چوار شەمب', 'پێنج شەمب'];
+        const periodsCount = schedule.settings.periodsPerDay || 7;
+        
+        const activeTeachers = schedule.teachers.filter(t => {
+            return schedule.columns.reduce((s, c) => s + (t.classes?.[c] ? Object.values(t.classes[c]).reduce((a, b) => a + parseInt(b, 10), 0) : 0), 0) > 0;
+        });
+
+        if(activeTeachers.length === 0) { showToast('هیچ ماموستایەك نینە خشتە هەبت', 'error'); return; }
+
+        html += `<h1 class="text-center mb-4">خشتێ گشتی یێ ماموستایان (الماستر للمعلمين)</h1>`;
+        html += `<div class="table-responsive"><table class="table table-bordered text-center align-middle" style="font-size: 7pt; width: 100%; table-layout: fixed;">
+                    <thead class="table-light">
+                        <tr>
+                            <th rowspan="2" class="align-middle bg-secondary text-white" style="width: 70px; border: 2px solid #000 !important;">ماموستا</th>`;
+        for(let d=0; d<days.length; d++) html += `<th colspan="${periodsCount}" class="border-start border-end border-dark" style="border: 2px solid #000 !important; background: #fff !important; color: #000 !important; font-weight: bold;">${days[d]}</th>`;
+        html += `</tr><tr>`;
+        for(let d=0; d<days.length; d++) {
+            for(let p=1; p<=periodsCount; p++) html += `<th class="${p===1?'border-start border-dark':''} ${p===periodsCount?'border-end border-dark':''}" style="padding: 1px; border: 1.5px solid #000 !important; background: #fff !important; color: #000 !important; font-weight: bold;">${p}</th>`;
+        }
+        html += `</tr></thead><tbody>`;
+
+        activeTeachers.forEach(teacher => {
+            html += `<tr><td class="fw-bold bg-light text-nowrap">${teacher.name}</td>`;
+            for (let d = 0; d < days.length; d++) {
+                for (let p = 1; p <= periodsCount; p++) {
+                    let foundClass = '', foundSubject = '';
+                    for(const cName of schedule.columns) {
+                        const item = schedule.timetables?.[cName]?.[d]?.[p];
+                        if (item && item.teacher === teacher.name) {
+                            foundClass = cName;
+                            foundSubject = item.subject;
+                            break;
+                        }
+                    }
+                    const borderClass = (p===1 ? 'border-start border-dark ' : '') + (p===periodsCount ? 'border-end border-dark ' : '');
+                    html += `<td class="${borderClass}" style="padding: 1px; overflow:hidden;">${foundClass ? `<div class="fw-bold text-danger" style="line-height:1.1; overflow-wrap:anywhere; word-break:break-word; white-space:normal;">${foundClass}</div><div class="text-muted" style="font-size: 5.5pt; line-height:1.05; overflow-wrap:anywhere; word-break:break-word; white-space:normal;">${foundSubject}</div>` : ''}</td>`;
+                }
+            }
+            html += `</tr>`;
+        });
+        html += `</tbody></table></div>`;
+        printWithContent('خشتێ گشتی یێ ماموستایان (الماستر)', html, { orientation: pageOrientation });
+    }
+
+    
+</script>
 </body>
 </html>
+
+
